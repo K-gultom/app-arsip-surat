@@ -15,15 +15,20 @@
 
     <script src="https://kit.fontawesome.com/f181524b5b.js" crossorigin="anonymous"></script>
 
+    {{-- Calender --}}
+    <!-- Tambahkan ini di dalam <head> layout utama atau view -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+    
     <style>
         body {
             position: relative;
         }
         a:hover {
-            background-color: #0f6d06;
+            background-color: #0452b9;
         }
         .navbar {
-            background-color: #0f6d06;
+            background-color: #0452b9;
         }
         .navbar-brand {
             margin-left: 10px;
@@ -32,9 +37,10 @@
         }
         .clr {
             /* background-color: #0262DD; */
-            background-color: #0B8500;
+            background-color: #0262DD;
+            /* background-color: #004195; */
             box-shadow: 10px 10px 20px 5px rgb(194, 194, 194);
-            
+            width: 250px;
         }
         .head {
             color: #ffffff;
@@ -48,7 +54,7 @@
         }
         .dropHover:hover {
             color: #fff;
-            background-color: #0f6d06;
+            background-color: #0452b9;
         }
         .dropdown-menu {
             width: 80%;
@@ -68,26 +74,28 @@
         .foot{
             margin-bottom: 150px;
         }
+        
     </style>
 </head>
 
 <body>
 <div class="d-flex">
-    <div class="clr max-height-vh-100 min-vh-100 col-2">
+    <div class="clr max-height-vh-100 min-vh-100"> 
+        {{-- //tmbah col kalau mau dinamis dari laravel --}}
         <nav class="nav flex-column">
             <div class="container">
                 <a class="head navbar-brand" href="{{ url('/') }}">
-                    <div class="row">
-                        <div class="col-1 m-6">
-                            <img src="{{ url('/assets/images/logo.jpg') }}" height="60">
-                            PEMPROV OKI 
-                        </div>
+                    <div class="row text-center">
                         <div class="col-12">
-                            <div class="row">
-                                <h3>SuperAdmin</h3>
-                            </div>
-                            <div class="row">
-                                <p>Kepala Desa</p>
+                            <img class="rounded-3" src="{{ url('/assets/images/logo.jpg') }}" height="80">
+                        </div>
+                        <div class="col">
+                            <div class="row mt-3">
+                                <div class="col text-center">
+                                    <h4>PEMPROV OKI</h4>
+                                    <h5>SuperAdmin</h5>
+                                    <p>Kepala Desa</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,16 +104,37 @@
             </div>
         
             <a href="{{ url('/beranda') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Beranda</a>
+
+            {{-- MASter Data --}}
             <div class="nav-item dropdown">
                 <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-people-fill"></i> Data Petugas
+                    <i class="bi bi-people-fill"></i> Data Master
                 </a>
                 <div class="dropdown-menu ml-4">
-                    <a href="{{ url('/admin') }}" class="dropdown-item dropHover">Data Admin</a>
-                    <a href="{{ url('/rt') }}" class="dropdown-item dropHover">Data RT</a>
+                    <a href="{{ url('/user') }}" class="dropdown-item dropHover">Data User</a>
+                    <a href="{{ url('/bagian') }}" class="dropdown-item dropHover">Data Bagian</a>
                 </div>
             </div>
-            <a href="{{ url('/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-database"></i> Data UMKM</a>
+            {{-- Data Surat --}}
+            <div class="nav-item dropdown">
+                <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-people-fill"></i> Data Surat
+                </a>
+                <div class="dropdown-menu ml-4">
+                    <a href="{{ url('/surat-masuk') }}" class="dropdown-item dropHover">Surat Masuk</a>
+                    <a href="{{ url('/surat-keluar') }}" class="dropdown-item dropHover">Surat Keluar</a>
+                </div>
+            </div>
+            {{-- Pelaporan --}}
+            <div class="nav-item dropdown">
+                <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-people-fill"></i> Pelaporan
+                </a>
+                <div class="dropdown-menu ml-4">
+                    <a href="{{ url('/surat-masuk-p') }}" class="dropdown-item dropHover">Surat Masuk</a>
+                    <a href="{{ url('/surat-keluar-p') }}" class="dropdown-item dropHover">Surat Keluar</a>
+                </div>
+            </div>
         </nav>
     </div>
 
@@ -148,6 +177,7 @@
             sidebar.classList.toggle('d-none');
         });
     });
+    
 </script>
 </body>
 </html>
