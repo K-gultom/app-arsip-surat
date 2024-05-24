@@ -121,8 +121,8 @@
                     <i class="bi bi-people-fill"></i> Data Surat
                 </a>
                 <div class="dropdown-menu ml-4">
-                    <a href="{{ url('/surat-masuk') }}" class="dropdown-item dropHover">Surat Masuk</a>
-                    <a href="{{ url('/surat-keluar') }}" class="dropdown-item dropHover">Surat Keluar</a>
+                    <a href="{{ url('/data/surat-masuk') }}" class="dropdown-item dropHover">Surat Masuk</a>
+                    <a href="{{ url('/data/surat-keluar') }}" class="dropdown-item dropHover">Surat Keluar</a>
                 </div>
             </div>
             {{-- Pelaporan --}}
@@ -131,8 +131,8 @@
                     <i class="bi bi-people-fill"></i> Pelaporan
                 </a>
                 <div class="dropdown-menu ml-4">
-                    <a href="{{ url('/surat-masuk-p') }}" class="dropdown-item dropHover">Surat Masuk</a>
-                    <a href="{{ url('/surat-keluar-p') }}" class="dropdown-item dropHover">Surat Keluar</a>
+                    <a href="{{ url('/pelaporan/surat-masuk') }}" class="dropdown-item dropHover">Surat Masuk</a>
+                    <a href="{{ url('/pelaporan/surat-keluar') }}" class="dropdown-item dropHover">Surat Keluar</a>
                 </div>
             </div>
         </nav>
