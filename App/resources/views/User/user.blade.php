@@ -65,40 +65,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($data as $item) --}}
+                        @foreach ($getUser as $item)
                                 <tr>
                                     <td>
-                                        {{-- {{ (($data->currentPage() - 1) * $data->perPage()) + $loop->iteration }}  --}} 1
+                                        {{ (($getUser->currentPage() - 1) * $getUser->perPage()) + $loop->iteration }} 
                                     </td>
-                                    {{-- <td>{{$item->name}} </td>
+                                    <td>{{$item->name}} </td>
                                     <td>{{$item->email}} </td>
-                                    <td>{{$item->telp}} </td> --}}
-                                    <td>Yusuf Bagus Setiawan</td>
-                                    <td>yusuf12388djkfksj@gmail.com</td>
-                                    <td>082179348721</td>
-                                    <td>Kelapa Desa</td>
-                                    <td>Super Admin</td>
+                                    <td>{{$item->telp}} </td>
+                                    <td>{{$item->Jabatan}} </td>
+                                    @if ($item->level == 'Super_Admin')
+                                        <td>Super Admin</td>
+                                    @elseif ($item->level == 'Admin')
+                                        <td>Admin</td>
+                                    @elseif ($item->level == 'User')
+                                        <td>User</td>
+                                    @endif
                                     <td class="text-center">
-                                        <a href="" class="btn btn-success btn-sm">
+                                        <a href="{{ url('/user/data') }}/{{ $item->id }}" class="btn btn-success btn-sm" title="Lihat Data">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="" class="btn btn-warning btn-sm">
+                                        <a href="{{ url('/user/edit') }}/{{ $item->id }}" class="btn btn-warning btn-sm" title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="" class="btn btn-danger btn-sm" 
+                                        <a href="{{ url('/user/password') }}/{{ $item->id }}" class="btn btn-info btn-sm" title="Ubah Password">
+                                            <i class="bi bi-key"></i>
+                                        </a>
+                                        <a href="{{ url('/user/destroy') }}/{{ $item->id }}" class="btn btn-danger btn-sm" title="Hapus"
                                             onclick="return confirm('Hapus Data ???');">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
                                 </tr>   
-                            {{-- @endforeach --}}
+                            @endforeach
                     </tbody>
                 </table>
                 {{-- <a href="{{url('/admin')}}" class="btn btn-primary">Refresh Page</a> --}}
-                {{-- {{$data->links()}} --}}
+                {{$getUser->links()}}
             </div>
         </div> 
     </div>
-
-    
 @endsection
