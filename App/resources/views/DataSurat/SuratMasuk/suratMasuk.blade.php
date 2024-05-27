@@ -20,7 +20,7 @@
                         <strong>Surat</strong> Masuk <i class="bi bi-envelope"></i>
                     </div>
                     <div class="w-100 pt-1 text-end"> 
-                        <a href="{{ url('/data/surat-masuk') }}" class="btn btn-primary">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/data/surat-masuk') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
             <div class="card-body">
                 <div class="row pb-4">
                     <div class="col">
-                        <a href="{{url('/user/add')}}" class="btn btn-primary btn-sm"> 
+                        <a href="{{url('/surat-masuk/add')}}" class="btn btn-primary btn-sm"> 
                             Surat Masuk Baru <i class="bi bi-envelope-plus"></i> 
                         </a>
                     </div>
@@ -37,7 +37,7 @@
                             {{-- <label for="search" class="form-label"><strong>Cari Data</strong> UMKM</label><br> --}}
                             <div class="input-group">
                                 <input type="text" class="form-control" name="search" placeholder="Cari Data User (Nama)...">
-                                <button class="btn btn-primary" type="submit">
+                                <button class="btn btn-primary btn-sm" type="submit">
                                     <i class="bi bi-search"></i> Search
                                 </button>
                             </div>
