@@ -84,7 +84,7 @@
         {{-- //tmbah col kalau mau dinamis dari laravel --}}
         <nav class="nav flex-column">
             <div class="container">
-                <a class="head navbar-brand" href="{{ url('/') }}">
+                <a class="head navbar-brand" href="{{ url('/beranda') }}">
                     <div class="row text-center">
                         <div class="col-12">
                             <img class="rounded-3" src="{{ url('/assets/images/logo.jpg') }}" height="80">
@@ -93,8 +93,14 @@
                             <div class="row mt-3">
                                 <div class="col text-center">
                                     <h4>PEMPROV OKI</h4>
-                                    <h5>SuperAdmin</h5>
-                                    <p>Kepala Desa</p>
+                                    @if (Auth::user()->level == 'Super_Admin')
+                                         <h5>Super Admin</h5>
+                                    @elseif (Auth::user()->level == 'Admin')
+                                        <h5>Admin</h5>
+                                    @elseif (Auth::user()->level == 'User')
+                                        <h5>User</h5>
+                                    @endif
+                                    <p>{{ Auth::user()->Jabatan }}</p>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +150,7 @@
                 <div class="d-flex align-items-center">
                     <button id="toggleMenuBtn" class="btn btn-light me-2"><i class="fas fa-bars"></i></button>
                     <a class="navbar-brand" href="#">
-                        {{-- Hai {{Auth()->user()->name}} --}}
+                        Hai {{Auth()->user()->name}}
                     </a>  
                 </div>
                 <a href="{{url('/logout')}}" class="text-light" style="text-decoration: none; margin-right: 30px;">

@@ -35,7 +35,7 @@
                                 </ul>
                             </div>
                         @endif
-                            <form action="{{url('dashboard')}}" method="POST">
+                            <form action="{{url('/')}}" method="POST">
             
                                 @csrf
                                 <div class="mb-3">
