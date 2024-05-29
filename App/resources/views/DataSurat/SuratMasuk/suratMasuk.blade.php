@@ -79,7 +79,7 @@
                                     <td class="text-center">
                                         {{-- <embed src="{{ asset('/assets/pdf/' . $item->file_surat) }}" type="application/pdf" width="100" height="100"> --}}
                                         <!-- Atau gunakan link -->
-                                        <a class="btn btn-outline-info btn-sm" href="{{ asset('/assets/pdf/' . $item->file_surat) }}" target="_blank">File PDF Surat</a>
+                                        <a class="btn btn-outline-info btn-sm" href="{{ asset('/assets/SuratMasuk/' . $item->file_surat) }}" target="_blank">File PDF Surat</a>
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ url('/surat-masuk/data') }}/{{ $item->id }}" class="btn btn-success btn-sm" title="Lihat Data">
@@ -88,7 +88,7 @@
                                         <a href="{{ url('/surat-masuk/edit') }}/{{ $item->id }}" class="btn btn-warning btn-sm" title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="" class="btn btn-danger btn-sm" title="Hapus" 
+                                        <a href="{{ url('/surat-masuk/destroy') }}/{{ $item->id }}" class="btn btn-danger btn-sm" title="Hapus" 
                                             onclick="return confirm('Hapus Data ???');">
                                             <i class="bi bi-trash"></i>
                                         </a>
@@ -97,7 +97,6 @@
                             @endforeach
                     </tbody>
                 </table>
-                {{-- <a href="{{url('/admin')}}" class="btn btn-primary">Refresh Page</a> --}}
                 {{$getSurat->links()}}
             </div>
         </div> 

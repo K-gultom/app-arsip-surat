@@ -49,6 +49,7 @@ Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function (
 
 
     // Routing Data Surat
+        // Surat Masuk
         Route::get('/data/surat-masuk', [DataSuratController::class, 'dataSuratMasuk']);
 
         Route::get('/surat-masuk/add', [DataSuratController::class, 'addSuratMasuk']);
@@ -59,13 +60,31 @@ Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function (
         Route::get('/surat-masuk/edit/{id}', [DataSuratController::class, 'dataSuratMasukEdit']);
         Route::post('/surat-masuk/edit/{id}', [DataSuratController::class, 'dataSuratMasukEdit_save']);
 
+        Route::get('/surat-masuk/destroy/{id}', [DataSuratController::class, 'destroySuratMasuk']);
 
+
+        // Surat Keluar
         Route::get('/data/surat-keluar', [DataSuratController::class, 'dataSuratKeluar']);
+
+        Route::get('/surat-keluar/add', [DataSuratController::class, 'addSuratKeluar']);
+        Route::post('/surat-keluar/add', [DataSuratController::class, 'addSuratKeluar_save']);
+
+        Route::get('/surat-keluar/data/{id}', [DataSuratController::class, 'lihatDataSuratKeluar']);
+
+        Route::get('/surat-keluar/edit/{id}', [DataSuratController::class, 'dataSuratKeluarEdit']);
+        Route::post('/surat-keluar/edit/{id}', [DataSuratController::class, 'dataSuratKeluarEdit_save']);
+
+        Route::get('/surat-keluar/destroy/{id}', [DataSuratController::class, 'destroySuratKeluar']);
+
 
 
     // Routing Pelaporan
         Route::get('/pelaporan/surat-masuk', [PelaporanController::class, 'pelaporanSuratMasuk']);
-        Route::get('/cetak/surat-masuk', [PelaporanController::class, 'cetakPelaporanSuratMasuk']);
+        Route::post('/pelaporan/surat-masuk', [PelaporanController::class, 'pelaporanSuratMasuk_proses']);
+
+        Route::get('/test', [PelaporanController::class, 'test']);
+
+        // Route::get('/cetak/surat-masuk', [PelaporanController::class, 'cetakPelaporanSuratMasuk']);
         Route::post('/cetak/surat-masuk', [PelaporanController::class, 'cetakPelaporanSuratMasuk_post']);
 
 

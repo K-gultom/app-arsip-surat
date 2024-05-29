@@ -1,17 +1,17 @@
 @extends('mainLayout.main')
 
 @section('title')
-    Surat Masuk
+    Surat Keluar
 @endsection
 
 @section('content')
 
     <div class="container-fluid">
-        <h4 class="mb-2">Surat Masuk</h4>
+        <h4 class="mb-2">Surat Keluar</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('/data/surat-masuk')}}" class="text-decoration-none">Surat Masuk</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edit Surat Masuk</li>
+                <li class="breadcrumb-item"><a href="{{url('/data/surat-keluar')}}" class="text-decoration-none">Surat Keluar</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Surat Keluar</li>
             </ol>
         </nav>
 
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header"><strong>Form</strong> Edit Surat</div>
                     <div class="card-body">
-                        <form action="{{ url('/surat-masuk/edit') }}/{{ $getDataEditSM->id }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('/surat-keluar/edit') }}/{{ $getDataEditSM->id }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <table class="table">
                                 <tr>
@@ -113,7 +113,7 @@
                                     <td>:</td>
                                     <td>
                                         <div class="form-outline">
-                                            <a class="btn btn-outline-warning btn-sm mb-3 " href="{{ asset('/assets/SuratMasuk/' . $getDataEditSM->file_surat) }}" target="_blank">Lihat File Surat saat Ini</a>
+                                            <a class="btn btn-outline-warning btn-sm mb-3 " href="{{ asset('/assets/SuratKeluar/' . $getDataEditSM->file_surat) }}" target="_blank">Lihat File Surat saat Ini</a>
                                             <input value="{{old('file_surat')}}" type="file" name="file_surat" id="file_surat" class="mb-1 form-control @error('file_surat') is-invalid @enderror" autocomplete="off"/>
                                             <p class="text-danger"><sup><strong>File Surat Harus Bertipe PDF!!!</strong></sup></p>
                                             @error('file_surat')
@@ -127,7 +127,7 @@
                             </table>
                             <button type="submit" class="btn btn-primary btn-sm">Update</button>
                             {{-- <button type="reset" class="btn btn-warning btn-sm">Reset</button> --}}
-                            <a href="{{ url('/data/surat-masuk') }}" class="btn btn-success btn-sm">Cancel</a>
+                            <a href="{{ url('/data/surat-keluar') }}" class="btn btn-success btn-sm">Cancel</a>
                         </form>
                     </div>
                 </div>

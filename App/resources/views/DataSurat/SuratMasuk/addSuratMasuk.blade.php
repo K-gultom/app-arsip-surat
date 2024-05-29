@@ -18,17 +18,17 @@
         <div class="row">
             <div class="col-8 offset-2">
                 <div class="card">
-                    <div class="card-header"><strong>Form</strong> Surat Baru</div>
+                    <div class="card-header"><strong>Form</strong> Surat Masuk Baru</div>
                     <div class="card-body">
                         <form action="{{ url('/surat-masuk/add') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <table class="table">
-                                {{-- <tr>
+                                <tr>
                                     <td>Nomor Surat</td>
                                     <td>:</td>
                                     <td>
                                         <div class="form-outline">
-                                            <input readonly value="{{old('nomor_surat')}}" type="text" name="nomor_surat" id="nomor_surat" class="form-control @error('nomor_surat') is-invalid @enderror" autocomplete="on"/>
+                                            <input value="{{old('nomor_surat')}}" type="text" name="nomor_surat" id="nomor_surat" class="form-control @error('nomor_surat') is-invalid @enderror" autocomplete="on"/>
                                             @error('nomor_surat')
                                               <div class="invalid-feedback">
                                                 {{$message}}
@@ -36,7 +36,7 @@
                                             @endif
                                         </div>
                                     </td>
-                                </tr> --}}
+                                </tr>
                                 <tr>
                                     <td>Tanggal Surat</td>
                                     <td>:</td>
@@ -73,19 +73,20 @@
                                             <select name="penerima" class="form-control @error('penerima') is-invalid @enderror" id="penerima">
                                                 <option value="">Penerima Surat</option>
                                                 @foreach ($getPenerima as $penerima)
-                                                    <option value="{{ $penerima->id }}" {{ old('penerima') == $penerima->id}}>
+                                                    <option value="{{ $penerima->id }}" {{ old('penerima') == $penerima->id ? 'selected' : '' }}>
                                                         {{ $penerima->nama_bagian }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                             @error('penerima')
-                                              <div class="invalid-feedback">
-                                                {{$message}}
-                                              </div>
-                                            @endif
+                                                <div class="invalid-feedback">
+                                                    {{$message}}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </td>
                                 </tr>
+                                
                                 <tr>
                                     <td>Pengirim</td>
                                     <td>:</td>
@@ -94,7 +95,7 @@
                                             <select name="pengirim" class="form-control @error('pengirim') is-invalid @enderror" id="pengirim">
                                                 <option value="">Pengirim Surat</option>
                                                 @foreach ($getPengirim as $pengirim)
-                                                    <option value="{{ $pengirim->id }}" {{ old('pengirim') == $pengirim->id}}>
+                                                    <option value="{{ $pengirim->id }}" {{ old('pengirim') == $pengirim->id ? 'selected' : ''}}>
                                                         {{ $pengirim->Jabatan }}
                                                     </option>
                                                 @endforeach

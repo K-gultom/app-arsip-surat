@@ -141,6 +141,8 @@
                     <a href="{{ url('/pelaporan/surat-keluar') }}" class="dropdown-item dropHover">Surat Keluar</a>
                 </div>
             </div>
+            
+            <a href="{{ url('/test') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Test</a>
         </nav>
     </div>
 

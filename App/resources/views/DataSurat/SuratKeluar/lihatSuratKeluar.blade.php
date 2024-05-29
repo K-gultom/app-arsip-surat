@@ -1,15 +1,15 @@
 @extends('mainLayout.main')
 
 @section('title')
-    Surat Masuk
+    Surat Keluar
 @endsection
 
 @section('content')
     <div class="container-fluid">
-        <h4 class="mb-3">Surat Masuk</h4>
+        <h4 class="mb-3">Surat Keluar</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('/data/surat-masuk')}}" class="text-decoration-none">Surat Masuk</a></li>
+                <li class="breadcrumb-item"><a href="{{url('/data/surat-keluar')}}" class="text-decoration-none">Surat Keluar</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Data Surat</li>
             </ol>
         </nav>
@@ -62,11 +62,11 @@
                                 <td>File Surat</td>
                                 <td>:</td>
                                 <td>
-                                    <a class="btn btn-outline-info btn-sm" href="{{ asset('/assets/SuratMasuk/' . $getSuratMasuk->file_surat) }}" target="_blank">File PDF Surat</a>
+                                    <a class="btn btn-outline-info btn-sm" href="{{ asset('/assets/SuratKeluar/' . $getSuratMasuk->file_surat) }}" target="_blank">File PDF Surat</a>
                                 </td>
                             </tr>
                         </table>
-                        <a href="{{ url('/data/surat-masuk') }}" class="btn btn-warning btn-sm">Kembali</a>
+                        <a href="{{ url('/data/surat-keluar') }}" class="btn btn-warning btn-sm">Kembali</a>
                     </div>
                 </div>  
             </div>
