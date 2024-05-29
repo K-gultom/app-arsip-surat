@@ -26,6 +26,16 @@
             </div>
 
             <div class="card-body">
+                @if(session('message'))
+                    <div id="flash-message" class="alert alert-warning">
+                        {{ session('message') }}
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById('flash-message').style.display = 'none';
+                        }, {{ session('timeout', 5000) }});
+                    </script>
+                @endif
                 <div class="row">
                     <div class="col-5 offset-3">
                         <form action="" class="form" method="POST">

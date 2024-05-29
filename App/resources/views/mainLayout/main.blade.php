@@ -74,7 +74,12 @@
         .foot{
             margin-bottom: 150px;
         }
-        
+        .level{
+            font-size: 20px;
+        }
+        .jabatan{
+            font-size: 16px;
+        }
     </style>
 </head>
 
@@ -92,15 +97,15 @@
                         <div class="col">
                             <div class="row mt-3">
                                 <div class="col text-center">
-                                    <h4>PEMPROV OKI</h4>
+                                    <h4>Desa Karya Multi</h4>
                                     @if (Auth::user()->level == 'Super_Admin')
-                                         <h5>Super Admin</h5>
+                                         <div class="level">Super Admin</div>
                                     @elseif (Auth::user()->level == 'Admin')
-                                        <h5>Admin</h5>
+                                        <div class="level">Admin</div>
                                     @elseif (Auth::user()->level == 'User')
-                                        <h5>User</h5>
+                                        <div class="level">User</div>
                                     @endif
-                                    <p>{{ Auth::user()->Jabatan }}</p>
+                                    <div class="jabatan mb-3">{{ Auth::user()->Jabatan }}</div>
                                 </div>
                             </div>
                         </div>
@@ -111,20 +116,25 @@
         
             <a href="{{ url('/beranda') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Beranda</a>
 
-            {{-- MASter Data --}}
-            <div class="nav-item dropdown">
-                <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-people-fill"></i> Data Master
-                </a>
-                <div class="dropdown-menu ml-4">
-                    <a href="{{ url('/user') }}" class="dropdown-item dropHover">Data User</a>
-                    <a href="{{ url('/bagian') }}" class="dropdown-item dropHover">Data Bagian</a>
+            @if (Auth::user()->level == 'Super_Admin' || Auth::user()->level == 'Admin')
+                {{-- MASter Data --}}
+                <div class="nav-item dropdown">
+                    <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-database-fill"></i> Data Master
+                    </a>
+                    <div class="dropdown-menu ml-4">
+                        @if (Auth::user()->level == 'Super_Admin')
+                            <a href="{{ url('/user') }}" class="dropdown-item dropHover">Data User</a>
+                        @endif
+                        <a href="{{ url('/bagian') }}" class="dropdown-item dropHover">Data Bagian</a>
+                    </div>
                 </div>
-            </div>
+            @endif
+            
             {{-- Data Surat --}}
             <div class="nav-item dropdown">
                 <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-people-fill"></i> Data Surat
+                    <i class="bi bi-envelope-fill"></i> Data Surat
                 </a>
                 <div class="dropdown-menu ml-4">
                     <a href="{{ url('/data/surat-masuk') }}" class="dropdown-item dropHover">Surat Masuk</a>
@@ -134,15 +144,13 @@
             {{-- Pelaporan --}}
             <div class="nav-item dropdown">
                 <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-people-fill"></i> Pelaporan
+                    <i class="bi bi-exclamation-circle-fill"></i> Pelaporan
                 </a>
                 <div class="dropdown-menu ml-4">
                     <a href="{{ url('/pelaporan/surat-masuk') }}" class="dropdown-item dropHover">Surat Masuk</a>
                     <a href="{{ url('/pelaporan/surat-keluar') }}" class="dropdown-item dropHover">Surat Keluar</a>
                 </div>
             </div>
-            
-            <a href="{{ url('/test') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Test</a>
         </nav>
     </div>
 

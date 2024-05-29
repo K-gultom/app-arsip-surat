@@ -20,10 +20,12 @@
         .head {
             padding: 8px;
             text-align: center;
+            font-size: 14px;
         }
         .tdData {
             padding: 8px;
             text-align: left;
+            font-size: 12px;
         }
         .tabelKopSurat{
             /* border: 1px solid black; */
@@ -31,10 +33,11 @@
             border-collapse: collapse;
             align-items: center;
             text-align: center;
+            border-bottom: 1px solid black;
         }
         .abc {
-            width: 130px;
-            /* margin-right: 50px; */
+            width: 100px;
+            margin-bottom: 10px;
             
         }
         .pemprov{
@@ -53,6 +56,7 @@
             text-align: center;
         }
         .desa {
+            font-size: 12px;
             text-align: center;
         }
         .kanan{
@@ -77,7 +81,7 @@
                 <div class="pemprov">PEMERINTAH DAERAH PROVINSI SUMATERA SELATAN</div>
                 <div class="oki">OGAN KOMERING ILIR - DESA KARYA MUKTI</div>
                 <div  class="laporan">Laporan Data Surat Masuk</div>
-                <div  class="desa">Jl. Poros Desa Karya Mukti Dusun I Blok A,  Kecamatan Mesuji, Kabupaten Ogan Komering Ilir, Sumatera Selatan, 30681,<br>
+                <div  class="desa">Jl. Poros Desa Karya Mukti Dusun I Blok A,  Kecamatan Mesuji, Kabupaten Ogan Komering Ilir, <br>Sumatera Selatan, 30681, 
                     Telp: 085314597652, Email: <a href="">c5karyamukti@gmail.com</a> </div>
             </td>
         </tr>

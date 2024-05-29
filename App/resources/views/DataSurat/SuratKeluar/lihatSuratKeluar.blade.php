@@ -66,7 +66,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <a href="{{ url('/data/surat-keluar') }}" class="btn btn-warning btn-sm">Kembali</a>
+                        <a href="{{ url('/data/surat-keluar') }}" class="btn btn-success btn-sm">Kembali <i class="bi bi-arrow-return-left"></i></a>
                     </div>
                 </div>  
             </div>

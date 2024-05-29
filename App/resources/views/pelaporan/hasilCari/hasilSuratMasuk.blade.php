@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h4 class="mb-3">Surat Masuk test</h4>
+        <h4 class="mb-3">Surat Masuk</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">Surat Masuk</li>
@@ -20,7 +20,7 @@
                         <strong>Surat</strong> Masuk <i class="bi bi-envelope"></i>
                     </div>
                     <div class="w-100 pt-1 text-end">
-                        <a href="{{ url('/pelaporan/surat-masuk') }}" class="btn btn-primary">Kembali <i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/pelaporan/surat-masuk') }}" class="btn btn-primary btn-sm">Kembali <i class="bi bi-arrow-clockwise"></i></a>
                     </div>
                 </div>
             </div>
