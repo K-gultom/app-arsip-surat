@@ -143,6 +143,7 @@
 
                 <button type="reset" class="btn btn-warning btn-block mb-2 btn-sm">Reset <i class="bi bi-x"></i></button>
 
+                <a href="{{ url('/user') }}" class="btn btn-success mb-2 btn-sm mx-2">Kembali <i class="bi bi-arrow-return-left"></i></a>
             </form> 
         </div>
     </div>

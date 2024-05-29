@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Surat Masuk</title>
+    <title>Laporan Surat Keluar</title>
     <style>
         body {
             margin: 0%;
@@ -20,10 +20,12 @@
         .head {
             padding: 8px;
             text-align: center;
+            font-size: 14px;
         }
         .tdData {
             padding: 8px;
             text-align: left;
+            font-size: 12px;
         }
         .tabelKopSurat{
             /* border: 1px solid black; */
@@ -31,10 +33,11 @@
             border-collapse: collapse;
             align-items: center;
             text-align: center;
+            border-bottom: 1px solid black;
         }
         .abc {
-            width: 130px;
-            /* margin-right: 50px; */
+            width: 100px;
+            margin-bottom: 10px;
             
         }
         .pemprov{
@@ -53,6 +56,7 @@
             text-align: center;
         }
         .desa {
+            font-size: 12px;
             text-align: center;
         }
         .kanan{
@@ -76,8 +80,8 @@
             <td class="kiri">
                 <div class="pemprov">PEMERINTAH DAERAH PROVINSI SUMATERA SELATAN</div>
                 <div class="oki">OGAN KOMERING ILIR - DESA KARYA MUKTI</div>
-                <div  class="laporan">Laporan Data Surat Masuk</div>
-                <div  class="desa">Jl. Poros Desa Karya Mukti Dusun I Blok A,  Kecamatan Mesuji, Kabupaten Ogan Komering Ilir, Sumatera Selatan, 30681,<br>
+                <div  class="laporan">Laporan Data Surat Keluar</div>
+                <div  class="desa">Jl. Poros Desa Karya Mukti Dusun I Blok A,  Kecamatan Mesuji, Kabupaten Ogan Komering Ilir, <br>Sumatera Selatan, 30681, 
                     Telp: 085314597652, Email: <a href="">c5karyamukti@gmail.com</a> </div>
             </td>
         </tr>
@@ -97,7 +101,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($suratMasuk as $surat)
+            @forelse($suratKeluar as $surat)
                 <tr>
                     <td class="tdData">{{ $loop->iteration }}</td>
                     <td class="tdData">{{ $surat->nomor_surat }}</td>

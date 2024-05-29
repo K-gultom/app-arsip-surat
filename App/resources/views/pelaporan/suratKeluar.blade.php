@@ -20,39 +20,47 @@
                         <strong>Surat</strong> Keluar <i class="bi bi-envelope"></i>
                     </div>
                     <div class="w-100 pt-1 text-end"> 
-                        <a href="{{ url('/pelaporan/surat-keluar') }}" class="btn btn-primary">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/pelaporan/surat-keluar') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
+                @if(session('message'))
+                    <div id="flash-message" class="alert alert-warning">
+                        {{ session('message') }}
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById('flash-message').style.display = 'none';
+                        }, {{ session('timeout', 5000) }});
+                    </script>
+                @endif
                 <div class="row">
                     <div class="col-5 offset-3">
-                        <form action="" class="form">
+                        <form action="" class="form" method="POST">
                             @csrf
-
                             <div class="form-group mb-3">
-                                <label for="nama_bagian">Dari Tanggal</label>
-                                <input type="date" id="nama_bagian" value="{{old('nama_bagian')}}" class="form-control @error('nama_bagian') is-invalid @enderror" name="nama_bagian" placeholder="Nama Bagian...">
-                                @error('nama_bagian')
+                                <label for="awal">Dari Tanggal</label>
+                                <input type="date" id="awal" value="{{old('awal')}}" class="form-control @error('awal') is-invalid @enderror" name="awal">
+                                @error('awal')
                                     <div class="invalid-feedback">
                                         {{$message}}
                                     </div>
                                 @enderror
                             </div>
-
                             <div class="form-group mb-3">
-                                <label for="nama_bagian">Sampai Tanggal</label>
-                                <input type="date" id="nama_bagian" value="{{old('nama_bagian')}}" class="form-control @error('nama_bagian') is-invalid @enderror" name="nama_bagian" placeholder="Nama Bagian...">
-                                @error('nama_bagian')
+                                <label for="akhir">Sampai Tanggal</label>
+                                <input type="date" id="akhir" value="{{old('akhir')}}" class="form-control @error('akhir') is-invalid @enderror" name="akhir">
+                                @error('akhir')
                                     <div class="invalid-feedback">
                                         {{$message}}
                                     </div>
                                 @enderror
                             </div>
-                            
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary">Cari <i class="bi bi-search"></i></button>
+                                {{-- <a href="{{ url('/cetak/surat-masuk') }}" class="btn btn-warning">Cari WARNING!!!!!</a> --}}
                             </div>
                         </form>
                     </div>

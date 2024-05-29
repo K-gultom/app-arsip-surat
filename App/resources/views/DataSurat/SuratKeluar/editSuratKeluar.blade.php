@@ -125,9 +125,9 @@
                                     </td>
                                 </tr>
                             </table>
-                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Update <i class="bi bi-check-lg"></i></button>
                             {{-- <button type="reset" class="btn btn-warning btn-sm">Reset</button> --}}
-                            <a href="{{ url('/data/surat-keluar') }}" class="btn btn-success btn-sm">Cancel</a>
+                            <a href="{{ url('/data/surat-keluar') }}" class="btn btn-warning btn-sm">Cancel <i class="bi bi-x"></i></a>
                         </form>
                     </div>
                 </div>

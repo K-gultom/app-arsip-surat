@@ -7,16 +7,20 @@ use Illuminate\Http\Request;
 
 class BagianController extends Controller
 {
-    public function bagian(){
+    public function bagian(Request $r){
 
-        $getData = bagian::paginate(10);
+        $search = $r->input('search');
+        $getData = bagian::where('nama_bagian', 'like', "%{$search}%")->paginate(10);
 
         // dd($getData);
         return view('Bagian.bagian', compact('getData'));
 
     }
 
-    public function bagian_Add(Request $req){
+    public function bagianAdd(){
+        return view('Bagian.addBagian');
+    }
+    public function bagianAdd_save(Request $req){
 
         $req->validate([
             'nama_bagian' => 'required|unique:bagians,nama_bagian',
@@ -26,7 +30,7 @@ class BagianController extends Controller
         $new->nama_bagian = $req->nama_bagian;
         $new->save();
 
-        return redirect()->back()->with('message', 'Tambah Data Bagian Berhasil!!!');
+        return redirect('/bagian')->with('message', 'Tambah Data Bagian Berhasil!!!');
 
     }
 

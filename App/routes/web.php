@@ -40,7 +40,8 @@ Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function (
     // Routing Bagian
         Route::get('/bagian', [BagianController::class, 'bagian']);
 
-        Route::post('/bagian/add', [BagianController::class, 'bagian_Add']);
+        Route::get('/bagian/add', [BagianController::class, 'bagianAdd']);
+        Route::post('/bagian/add', [BagianController::class, 'bagianAdd_save']);
 
         Route::get('/bagian/edit/{id}', [BagianController::class, 'bagian_Edit']);
         Route::post('/bagian/edit/{id}', [BagianController::class, 'bagian_Edit_save']);
@@ -77,19 +78,20 @@ Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function (
         Route::get('/surat-keluar/destroy/{id}', [DataSuratController::class, 'destroySuratKeluar']);
 
 
-
     // Routing Pelaporan
         Route::get('/pelaporan/surat-masuk', [PelaporanController::class, 'pelaporanSuratMasuk']);
         Route::post('/pelaporan/surat-masuk', [PelaporanController::class, 'pelaporanSuratMasuk_proses']);
 
-        Route::get('/test', [PelaporanController::class, 'test']);
-
-        // Route::get('/cetak/surat-masuk', [PelaporanController::class, 'cetakPelaporanSuratMasuk']);
         Route::post('/cetak/surat-masuk', [PelaporanController::class, 'cetakPelaporanSuratMasuk_post']);
 
-
         Route::get('/pelaporan/surat-keluar', [PelaporanController::class, 'pelaporanSuratKeluar']);
-        Route::get('/cetak/surat-keluar', [PelaporanController::class, 'cetakPelaporanSuratKeluar']);
+        Route::post('/pelaporan/surat-keluar', [PelaporanController::class, 'pelaporanSuratKeluar_proses']);
 
-    
+        Route::post('/cetak/surat-keluar', [PelaporanController::class, 'cetakPelaporanSuratKeluar_post']);
+
+});
+
+
+Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function () {
+
 });

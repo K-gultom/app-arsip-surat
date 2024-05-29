@@ -11,10 +11,14 @@ class UserController extends Controller
 
     
     // Proses Untuk menampilkan halaman data user
-    public function user(){
+    public function user(Request $r){
 
-        $getUser = User::paginate(10);
+        $search = $r->input('search');
+        $getUser = User::where('name', 'like', "%{$search}%")
+        ->orWhere('Jabatan', 'like', "%{$search}%")
+        ->paginate(10);
         return view('User.user', compact('getUser'));
+
     }
     
     // Proses Untuk Simpan Data User get
@@ -55,29 +59,42 @@ class UserController extends Controller
         return view('User.editUser', compact('getData'));
     }
 
-    // Proses Untuk Ubah Data User post
     public function user_edit_save(Request $req, $id){
 
+        // Find the existing user
+        $user = User::find($id);
+
+        // Initial validation for all fields except email
         $req->validate([
             'name' => 'required|min:3',
             'Jabatan' => 'required|min:3',
             'alamat' => 'required|min:5',
             'telp' => 'required|min:8|max:14',
-            'email' => 'required|unique:users,email',
             'level' => 'required',
         ]);
 
-        $new                = User::find($id);
-        $new->name          = $req->name;
-        $new->Jabatan       = $req->Jabatan;
-        $new->alamat        = $req->alamat;
-        $new->telp          = $req->telp;
-        $new->email         = $req->email;
-        $new->level         = $req->level;
-        $new->save();
+        // Additional validation for email if it's different
+        if ($req->email !== $user->email) {
+            $req->validate([
+                'email' => 'required|email|unique:users,email',
+            ]);
+            $user->email = $req->email;
+        }
 
+        // Update the remaining fields
+        $user->name = $req->name;
+        $user->Jabatan = $req->Jabatan;
+        $user->alamat = $req->alamat;
+        $user->telp = $req->telp;
+        $user->level = $req->level;
+
+        // Save the updated user
+        $user->save();
+
+        // Redirect with success message
         return redirect('/user')->with('message', 'Data User Berhasil diUpdate!!!');
     }
+
 
     // Untuk Lihat Data
     public function user_data($id){

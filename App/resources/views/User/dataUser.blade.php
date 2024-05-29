@@ -44,10 +44,18 @@
                             <tr>
                                 <td><strong>Level</strong></td>
                                 <td>:</td>
-                                <td>{{ $getData->level }}</td>
+                                <td>
+                                    @if ($getData->level == 'Super_Admin')
+                                         Super Admin
+                                    @elseif ($getData->level == 'Admin')
+                                        Admin
+                                    @elseif ($getData->level == 'User')
+                                        User
+                                    @endif
+                                </td>
                             </tr>
                         </table>
-                        <a href="{{ url('/user') }}" class="btn btn-warning btn-sm">Kembali</a>
+                        <a href="{{ url('/user') }}" class="btn btn-success mb-2 btn-sm">Kembali <i class="bi bi-arrow-return-left"></i></a>
                     </div>
                 </div>
             </div>

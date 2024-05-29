@@ -19,6 +19,10 @@
                     <div class="w-100 pt-1"> 
                         <strong>Data</strong> User <i class="bi bi-person"></i>
                     </div>
+                    
+                    <div class="w-100 pt-1 text-end">
+                        <a href="{{ url('/user') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
+                    </div>
                 </div>
             </div>
 
@@ -33,7 +37,7 @@
                         <form action="">
                             {{-- <label for="search" class="form-label"><strong>Cari Data</strong> UMKM</label><br> --}}
                             <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Cari Data User (Nama)...">
+                                <input type="text" class="form-control" name="search" placeholder="Cari Data User (Nama)/Jabatan...">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="bi bi-search"></i> Search
                                 </button>

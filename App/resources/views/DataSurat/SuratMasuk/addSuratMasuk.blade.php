@@ -124,9 +124,9 @@
                                     </td>
                                 </tr>
                             </table>
-                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                            <button type="reset" class="btn btn-warning btn-sm">Reset</button>
-                            <a href="{{ url('/data/surat-masuk') }}" class="btn btn-success btn-sm mx-2">Kembali</a>
+                            <button type="submit" class="btn btn-primary btn-sm">Simpan <i class="bi bi-check-lg"></i></button>
+                            <button type="reset" class="btn btn-warning btn-sm">Reset <i class="bi bi-x"></i></button>
+                            <a href="{{ url('/data/surat-masuk') }}" class="btn btn-success btn-sm mx-2">Kembali <i class="bi bi-arrow-return-left"></i></a>
                         </form>
                     </div>
                 </div>

@@ -35,7 +35,7 @@ class DataSuratController extends Controller
     
         return view('DataSurat.SuratMasuk.suratMasuk', compact('getSurat'));
     }
-    
+
 
     public function addSuratMasuk(){
 
