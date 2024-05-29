@@ -1,26 +1,26 @@
 @extends('mainLayout.main')
 
 @section('title')
-    Surat Masuk
+    Surat Keluar
 @endsection
 
 @section('content')
 
     <div class="container-fluid">
-        <h4 class="mb-2">Surat Masuk</h4>
+        <h4 class="mb-2">Surat Keluar</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('/data/surat-masuk')}}" class="text-decoration-none">Surat Masuk</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Surat Masuk Baru</li>
+                <li class="breadcrumb-item"><a href="{{url('/data/surat-keluar')}}" class="text-decoration-none">Surat Keluar</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Surat Keluar Baru</li>
             </ol>
         </nav>
 
         <div class="row">
             <div class="col-8 offset-2">
                 <div class="card">
-                    <div class="card-header"><strong>Form</strong> Surat Masuk Baru</div>
+                    <div class="card-header"><strong>Form</strong> Surat Keluar Baru</div>
                     <div class="card-body">
-                        <form action="{{ url('/surat-masuk/add') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('/surat-keluar/add') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <table class="table">
                                 <tr>
@@ -126,7 +126,7 @@
                             </table>
                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                             <button type="reset" class="btn btn-warning btn-sm">Reset</button>
-                            <a href="{{ url('/data/surat-masuk') }}" class="btn btn-success btn-sm mx-2">Kembali</a>
+                            <a href="{{ url('/data/surat-keluar') }}" class="btn btn-success btn-sm mx-2">Kembali</a>
                         </form>
                     </div>
                 </div>

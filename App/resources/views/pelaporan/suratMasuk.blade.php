@@ -20,7 +20,7 @@
                         <strong>Surat</strong> Masuk <i class="bi bi-envelope"></i>
                     </div>
                     <div class="w-100 pt-1 text-end"> 
-                        <a href="{{ url('/pelaporan/surat-masuk') }}" class="btn btn-primary">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/pelaporan/surat-masuk') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-5 offset-3">
-                        <form action="" class="form">
+                        <form action="" class="form" method="POST">
                             @csrf
                             <div class="form-group mb-3">
                                 <label for="awal">Dari Tanggal</label>

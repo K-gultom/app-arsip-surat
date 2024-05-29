@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class suratMasuk extends Model
+class suratKeluar extends Model
 {
     use HasFactory;
 
@@ -29,5 +29,4 @@ class suratMasuk extends Model
     {
         return $this->belongsTo(bagian::class, 'penerima', 'id');
     }
-    
 }

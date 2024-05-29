@@ -24,17 +24,24 @@
     .content {
       margin-top: 0;
     }
+
+    body{
+      background: url('assets/images/bg.jpg') no-repeat center center fixed ;
+      background-size: cover;
+
+      background-color: beige;
+    }
   </style>
 
 </head>
 <body>
 
-  <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row content">
             <div class="col">@yield('content')</div>
         </div>
-  </div>
+    </div>
 
-  <script src="{{ url('assets/bootstrap5/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url('assets/bootstrap5/js/bootstrap.min.js') }}"></script>
 </body>
 </html>
