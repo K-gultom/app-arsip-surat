@@ -96,7 +96,7 @@
                         </div>
                         <div class="col">
                             <div class="row mt-3">
-                                <div class="col text-center">
+                                <div class="col text-center mb-3">
                                     <h4>Desa Karya Multi</h4>
                                     @if (Auth::user()->level == 'Super_Admin')
                                          <div class="level">Super Admin</div>
@@ -105,7 +105,7 @@
                                     @elseif (Auth::user()->level == 'User')
                                         <div class="level">User</div>
                                     @endif
-                                    <div class="jabatan mb-3">{{ Auth::user()->Jabatan }}</div>
+                                    {{-- <div class="jabatan mb-3">{{ Auth::user()->Jabatan }}</div> --}}
                                 </div>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                 <div class="d-flex align-items-center">
                     <button id="toggleMenuBtn" class="btn btn-light me-2"><i class="fas fa-bars"></i></button>
                     <a class="navbar-brand" href="#">
-                        Hai {{Auth()->user()->name}}
+                        Hai {{Auth()->user()->name}}  <strong>-</strong> {{ Auth::user()->Jabatan }}
                     </a>  
                 </div>
                 <a href="{{url('/logout')}}" class="text-light" style="text-decoration: none; margin-right: 30px;">
