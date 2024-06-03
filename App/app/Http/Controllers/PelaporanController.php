@@ -146,7 +146,7 @@ class PelaporanController extends Controller
 
         $headers = [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="Laporan_Surat_Masuk.pdf"',
+            'Content-Disposition' => 'attachment; filename="Laporan_Surat_Keluar.pdf"',
         ];
 
         // Return response with appropriate headers for new tab download
