@@ -10,7 +10,7 @@
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('surat-keluar')}}" class="text-decoration-none">Surat Keluar</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Surat Desa</li>
+            <li class="breadcrumb-item active" aria-current="page">Surat Usaha</li>
             </ol>
         </nav>
 
@@ -18,10 +18,10 @@
             <div class="card-header"> 
                 <div class="d-flex">
                     <div class="w-100 pt-1"> 
-                        <strong>Surat</strong> Desa <i class="bi bi-envelope"></i>
+                        <strong>Surat</strong> Usaha <i class="bi bi-envelope"></i>
                     </div>
                     <div class="w-100 pt-1 text-end"> 
-                        <a href="{{ url('/data/surat-keluar') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/surat-usaha') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
                     </div>
                 </div>
             </div>
@@ -30,15 +30,15 @@
                 <div class="row pb-4">
                     @if (Auth::user()->level == "User")
                         <div class="col">
-                            <a href="{{url('/surat-keluar/add')}}" class="btn btn-primary btn-sm"> 
-                                Surat Desa Baru <i class="bi bi-envelope-plus"></i> 
+                            <a href="{{url('/surat-usaha/add')}}" class="btn btn-primary btn-sm"> 
+                                Surat Baru <i class="bi bi-envelope-plus"></i> 
                             </a>
                         </div>
                         <div class="col">
                             <form action="">
                                 {{-- <label for="search" class="form-label"><strong>Cari Data</strong> UMKM</label><br> --}}
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="search" placeholder="Cari No Surat/Pengirim/Penerima/Perihal Surat">
+                                    <input type="text" class="form-control" name="search" placeholder="Cari Nama/NIK...">
                                     <button class="btn btn-primary btn-sm" type="submit">
                                         <i class="bi bi-search"></i> Search
                                     </button>
@@ -51,7 +51,7 @@
                             <form action="">
                                 {{-- <label for="search" class="form-label"><strong>Cari Data</strong> UMKM</label><br> --}}
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="search" placeholder="Cari No Surat/Pengirim/Penerima/Perihal Surat">
+                                    <input type="text" class="form-control" name="search" placeholder="Cari Nama/NIK...">
                                     <button class="btn btn-primary btn-sm" type="submit">
                                         <i class="bi bi-search"></i> Search
                                     </button>
@@ -76,18 +76,14 @@
                         <tr>
                             <th>No</th>
                             <th>No Surat</th>
+                            <th>Nama</th>
+                            <th>NIK</th>
                             <th>Tgl Surat</th>
-                            <th>Perihal</th>
-                            <th>Pengirim</th>
-                            <th>Penerima</th>
-                            <th class="text-center">File Surat</th>
-                            @if (Auth::user()->level == "User")
-                                <th class="text-center">Aksi</th>
-                            @endif
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($getSurat as $item)
+                        {{-- @foreach ($getSurat as $item)
                                 <tr>
                                     <td>
                                         {{ (($getSurat->currentPage() - 1) * $getSurat->perPage()) + $loop->iteration }} 
@@ -117,10 +113,10 @@
                                         </td>
                                     @endif
                                 </tr>   
-                            @endforeach
+                            @endforeach --}}
                     </tbody>
                 </table>
-                {{$getSurat->links()}}
+                {{-- {{$getSurat->links()}} --}}
             </div>
         </div> 
     </div>

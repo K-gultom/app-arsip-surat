@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\File;
 
 class DataSuratController extends Controller
 {
+    // ===================================Surat Masuk====================================
     public function dataSuratMasuk(Request $r){
         $search = $r->input('search');
         
@@ -185,11 +186,13 @@ class DataSuratController extends Controller
     
 
 
+    // ===================================Surat Keluar==========================================
 
+    public function Surat_keluar(){
 
-
-
-
+        return view('DataSurat.SuratKeluarHome');
+    }
+    
     public function dataSuratKeluar(Request $r){
         $search = $r->input('search');
         
@@ -358,5 +361,34 @@ class DataSuratController extends Controller
 
 
 
+
+    // ============================Revisi Untuk SUrat Baru==================================
+
+    public function surat_usaha(){
+        
+        return view('DataSurat.SuratKeteranganUsaha.suratUsaha');
+    }
+
+    public function surat_usaha_add(){
+
+        $getUser = User::all();
+        return view('DataSurat.SuratKeteranganUsaha.addsuratUsaha', compact('getUser'));
+    }
+
+
+
+
+    public function surat_tidak_mampu(){
+
+    }
+
+
+
+
+
+
+    public function surat_domisili(){
+
+    }
 
 }

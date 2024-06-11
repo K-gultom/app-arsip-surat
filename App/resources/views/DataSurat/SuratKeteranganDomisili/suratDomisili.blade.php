@@ -10,7 +10,7 @@
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('surat-keluar')}}" class="text-decoration-none">Surat Keluar</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Surat Desa</li>
+            <li class="breadcrumb-item active" aria-current="page">Surat Keterangan Domisili</li>
             </ol>
         </nav>
 
@@ -18,10 +18,10 @@
             <div class="card-header"> 
                 <div class="d-flex">
                     <div class="w-100 pt-1"> 
-                        <strong>Surat</strong> Desa <i class="bi bi-envelope"></i>
+                        <strong>Surat</strong> Keterangan Domisili <i class="bi bi-envelope"></i>
                     </div>
                     <div class="w-100 pt-1 text-end"> 
-                        <a href="{{ url('/data/surat-keluar') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/surat-domisili') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
                     </div>
                 </div>
             </div>

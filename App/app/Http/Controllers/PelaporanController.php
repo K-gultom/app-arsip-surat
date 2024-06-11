@@ -152,7 +152,7 @@ class PelaporanController extends Controller
         // Return response with appropriate headers for new tab download
         return response($content, 200, $headers)
             ->header('Content-Type', 'application/pdf')
-            ->header('Content-Disposition', 'attachment; filename="Laporan_Surat_Masuk.pdf"');
+            ->header('Content-Disposition', 'attachment; filename="Laporan_Surat_Keluar.pdf"');
     }
 
 

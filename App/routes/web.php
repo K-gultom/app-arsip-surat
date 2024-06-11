@@ -13,9 +13,21 @@ use Illuminate\Support\Facades\Route;
     Route::get('/', [AuthController::class, 'login'])->name('login');
     Route::post('/', [AuthController::class, 'login_proses']);
 
-    // Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function () {
+    Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function () {
         
-    // });
+        //view untuk home menu surat keluar
+        Route::get('/surat-keluar', [DataSuratController::class, 'Surat_keluar']);
+
+
+        Route::get('/surat-usaha', [DataSuratController::class, 'surat_usaha']);
+        Route::get('/surat-usaha/add', [DataSuratController::class, 'surat_usaha_add']);
+        
+        Route::get('/surat-tidak-mampu', [DataSuratController::class, 'surat_tidak_mampu']);
+        
+        Route::get('/surat-domisili', [DataSuratController::class, 'surat_domisili']);
+    });
+
+
 
     Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function () {
         /**
