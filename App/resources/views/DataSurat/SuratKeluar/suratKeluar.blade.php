@@ -21,7 +21,8 @@
                         <strong>Surat</strong> Desa <i class="bi bi-envelope"></i>
                     </div>
                     <div class="w-100 pt-1 text-end"> 
-                        <a href="{{ url('/data/surat-keluar') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/data/surat-keluar') }}" class="btn btn-primary btn-sm" title="Refresh"><i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/surat-keluar') }}" class="btn btn-success btn-sm">Kembali <i class="bi bi-arrow-return-left"></i></a>
                     </div>
                 </div>
             </div>

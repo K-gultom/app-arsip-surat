@@ -11,17 +11,17 @@
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('/surat-keluar')}}" class="text-decoration-none">Surat Keluar</a></li>
-                <li class="breadcrumb-item"><a href="{{url('/surat-usaha')}}" class="text-decoration-none">Surat Usaha</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edit Surat Usaha</li>
+                <li class="breadcrumb-item"><a href="{{url('/surat-tidak-mampu')}}" class="text-decoration-none">Surat Tidak Mampu</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Surat Tidak Mampu Edit</li>
             </ol>
         </nav>
 
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <div class="card-header"><strong>Form</strong> Surat Keterangan Usaha</div>
+                    <div class="card-header"><strong>Form</strong> Surat Keterangan Tidak Mampu</div>
                     <div class="card-body">
-                        <form action="{{ url('/surat-usaha/edit') }}/{{ $getData->id }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('/surat-tidak-mampu/edit') }}/{{ $getData->id }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-4" style="border-bottom: 1px solid gray">
                                 <div class="col">
@@ -42,9 +42,9 @@
                                                     <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
                                                     </div>
                                                     @error('tanda_tangan')
-                                                      <div class="invalid-feedback">
-                                                        {{$message}}
-                                                      </div>
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </td>
@@ -57,34 +57,21 @@
                                             <td>Tanggal Buat Surat</td>
                                             <td>
                                                 <div class="form-outline">
-                                                    <input value="{{old('tanggal_surat_dibuat', $getData->tanggal_surat_dibuat)}}" type="date" name="tanggal_surat_dibuat" id="tanggal_surat_dibuat" class="form-control @error('tanggal_surat_dibuat') is-invalid @enderror" autocomplete="off"/>
-                                                    @error('tanggal_surat_dibuat')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
+                                                    <input value="{{old('tgl_surat_dibuat', $getData->tgl_surat_dibuat)}}" type="date" name="tgl_surat_dibuat" id="tgl_surat_dibuat" class="form-control @error('tgl_surat_dibuat') is-invalid @enderror" autocomplete="off"/>
+                                                    @error('tgl_surat_dibuat')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </td>
                                         </tr>
-                                        {{-- <tr>
-                                            <td>Nomor Surat</td>
-                                            <td>
-                                                <div class="form-outline">
-                                                    <input value="{{old('nomor_surat')}}" type="text" name="nomor_surat" id="nomor_surat" class="form-control @error('nomor_surat') is-invalid @enderror" autocomplete="on"/>
-                                                    @error('nomor_surat')
-                                                      <div class="invalid-feedback">
-                                                        {{$message}}
-                                                      </div>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr> --}}
                                     </table>
                                 </div>
                             </div>
 
 
-                            <div class="row">
+                            <div class="row mb-4">
                                 <div class="col">
                                     <table class="table table-borderless">
                                         <tr>
@@ -93,9 +80,9 @@
                                                 <div class="form-outline">
                                                     <input value="{{old('nama_lengkap', $getData->nama_lengkap)}}" type="text" name="nama_lengkap" id="nama_lengkap" class="form-control @error('nama_lengkap') is-invalid @enderror" autocomplete="off"/>
                                                     @error('nama_lengkap')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </td>
@@ -129,9 +116,9 @@
                                                 <div class="form-outline">
                                                     <input value="{{old('tempat_lahir', $getData->tempat_lahir)}}" type="text" name="tempat_lahir" id="tempat_lahir" class="form-control @error('tempat_lahir') is-invalid @enderror" autocomplete="off"/>
                                                     @error('tempat_lahir')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </td>
@@ -143,9 +130,9 @@
                                                 <div class="form-outline">
                                                     <input value="{{old('tgl_lahir', $getData->tgl_lahir)}}" type="date" name="tgl_lahir" id="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror" autocomplete="off"/>
                                                     @error('tgl_lahir')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </td>
@@ -157,9 +144,9 @@
                                                 <div class="form-outline">
                                                     <input value="{{old('alamat', $getData->alamat)}}" type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" autocomplete="off"/>
                                                     @error('alamat')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </td>
@@ -183,9 +170,56 @@
                                                     <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
                                                     </div>
                                                     @error('jenis_kelamin')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </td>
+                                        </tr>
+        
+                                        <tr>
+                                            <td>Status Perkawinan</td>
+                                            <td>
+                                                <div class="form-outline">
+                                                    <div class="input-group">
+                                                    <select value="{{ old('status_perkawinan') ?? '' }}" name="status_perkawinan" class="form-control @error('status_perkawinan') is-invalid @enderror" id="">
+                                                        <option value=""></option>
+                                                        <option value="Kawin" {{ old('status_perkawinan', $getData->status_perkawinan) == 'Kawin' ? 'selected' : '' }}>Kawin</option>
+                                                        <option value="Belum_Kawin" {{ old('status_perkawinan', $getData->status_perkawinan) == 'Belum_Kawin' ? 'selected' : '' }}>Belum Kawin</option>
+                                                        <option value="Cerai" {{ old('status_perkawinan', $getData->status_perkawinan) == 'Cerai' ? 'selected' : '' }}>Cerai</option>
+                                                    </select>
+                                                    <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
                                                     </div>
+                                                    @error('status_perkawinan')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Agama</td>
+                                            <td>
+                                                <div class="form-outline">
+                                                    <div class="input-group">
+                                                    <select value="{{ old('agama') ?? '' }}" name="agama" class="form-control @error('agama') is-invalid @enderror" id="">
+                                                        <option value=""></option>
+                                                        <option value="Islam" {{ old('agama', $getData->agama) == 'Islam' ? 'selected' : '' }}>Islam</option>
+                                                        <option value="Khatolik" {{ old('agama', $getData->agama) == 'Khatolik' ? 'selected' : '' }}>Khatolik</option>
+                                                        <option value="Kristen" {{ old('agama', $getData->agama) == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                                                        <option value="Buddha" {{ old('agama', $getData->agama) == 'Buddha' ? 'selected' : '' }}>Buddha</option>
+                                                        <option value="Hindu" {{ old('agama', $getData->agama) == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                                                        <option value="Agama_Kepercayaan" {{ old('agama', $getData->agama) == 'Agama_Kepercayaan' ? 'selected' : '' }}>Agama Kepercayaan</option>
+                                                    </select>
+                                                    <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
+                                                    </div>
+                                                    @error('agama')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
                                                     @enderror
                                                 </div>
                                             </td>
@@ -195,70 +229,28 @@
                                             <td>Pekerjaan</td>
                                             <td>
                                                 <div class="form-outline">
-                                                    <input value="{{old('pekerjaan', $getData->pekerjaan)}}" type="text" name="pekerjaan" id="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror" autocomplete="off"/>
-                                                    @error('pekerjaan')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
+                                                    <input value="{{old('pekerjaan_pemohon', $getData->pekerjaan_pemohon)}}" type="text" name="pekerjaan_pemohon" id="pekerjaan_pemohon" class="form-control @error('pekerjaan_pemohon') is-invalid @enderror" autocomplete="off"/>
+                                                    @error('pekerjaan_pemohon')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </td>
                                         </tr>
-        
-                                        <tr>
-                                            <td>Tempat Pekerjaan</td>
-                                            <td>
-                                                <div class="form-outline">
-                                                    <input value="{{old('tempat_pekerjaan', $getData->tempat_pekerjaan)}}" type="text" name="tempat_pekerjaan" id="tempat_pekerjaan" class="form-control @error('tempat_pekerjaan') is-invalid @enderror" autocomplete="off" placeholder="**Isi jika bekerja di tempat lain"/>
-                                                    @error('tempat_pekerjaan')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr>
-        
-                                        <tr>
-                                            <td>Bidang Usaha</td>
-                                            <td>
-                                                <div class="form-outline">
-                                                    <input value="{{old('bidang_usaha', $getData->bidang_usaha)}}" type="text" name="bidang_usaha" id="bidang_usaha" class="form-control @error('bidang_usaha') is-invalid @enderror" autocomplete="off"/>
-                                                    @error('bidang_usaha')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        
-                                        {{-- <tr>
-                                            <td>Tanggal Buat Surat</td>
-                                            <td>
-                                                <div class="form-outline">
-                                                    <input value="{{old('tanggal_surat_dibuat')}}" type="date" name="tanggal_surat_dibuat" id="tanggal_surat_dibuat" class="form-control @error('tanggal_surat_dibuat') is-invalid @enderror" autocomplete="off"/>
-                                                    @error('tanggal_surat_dibuat')
-                                                    <div class="invalid-feedback">
-                                                        {{$message}}
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </td>
-                                        </tr> --}}
-    
+
                                     </table>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-sm">Update <i class="bi bi-check-lg"></i></button>
-                            <a href="{{ url('/surat-usaha') }}" class="btn btn-success btn-sm">Kembali <i class="bi bi-arrow-return-left"></i></a>
+                            <button type="submit" class="btn btn-primary btn-sm">Simpan <i class="bi bi-check-lg"></i></button>
+                            <button type="reset" class="btn btn-warning btn-sm">Reset <i class="bi bi-x"></i></button>
+                            <a href="{{ url('/surat-tidak-mampu') }}" class="btn btn-success btn-sm mx-2">Kembali <i class="bi bi-arrow-return-left"></i></a>
 
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

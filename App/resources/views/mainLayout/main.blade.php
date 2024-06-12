@@ -139,7 +139,6 @@
                 <div class="dropdown-menu ml-4">
                     <a href="{{ url('/data/surat-masuk') }}" class="dropdown-item dropHover">Surat Masuk</a>
                     <a href="{{ url('/surat-keluar') }}" class="dropdown-item dropHover">Surat Keluar</a>
-                    <a href="{{ url('/surat-keterangan') }}" class="dropdown-item dropHover">Surat Keterangan</a>
                 </div>
             </div>
             {{-- Pelaporan --}}

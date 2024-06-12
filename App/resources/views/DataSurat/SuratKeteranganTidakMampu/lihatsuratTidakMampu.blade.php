@@ -6,12 +6,12 @@
 
 @section('content')
     <div class="container-fluid">
-        <h4 class="mb-2">Surat Keluar</h4>
+        <h4 class="mb-3">Surat Keluar</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{url('/surat-keluar')}}" class="text-decoration-none">Surat Keluar</a></li>
-                <li class="breadcrumb-item"><a href="{{url('/surat-usaha')}}" class="text-decoration-none">Surat Usaha</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data Surat Usaha</li>
+                <li class="breadcrumb-item"><a href="{{url('/surat-tidak-mampu')}}" class="text-decoration-none">Surat tidak Mampu</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Data Surat Tidak Mampu</li>
             </ol>
         </nav>
 
@@ -29,7 +29,7 @@
                             <tr>
                                 <td>Tanggal Surat</td>
                                 <td>:</td>
-                                <td>{{ $getData->tanggal_surat_dibuat }}</td>
+                                <td>{{Carbon\Carbon::parse($getData->tgl_surat_dibuat)->format('d-m-Y') }}</td>
                             </tr>
                             <tr>
                                 <td>Nama</td>
@@ -40,18 +40,6 @@
                                 <td>NIK</td>
                                 <td>:</td>
                                 <td>{{ $getData->nik }}</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>Tempat/Tgl Lahir</td>
-                                <td>:</td>
-                                <td>{{ $getData->tempat_lahir }}, {{ Carbon\Carbon::parse($getData->tanggal_surat_dibuat)->format('d-m-Y') }}</td>
-                            </tr>
-                            <tr>
-                                <td>Alamat</td>
-                                <td>:</td>
-                                <td>{{ $getData->alamat }}</td>
-                                
                             </tr>
                             <tr>
                                 <td>Jenis Kelamin</td>
@@ -66,30 +54,56 @@
                                 
                             </tr>
                             <tr>
-                                <td>Pekerjaan</td>
+                                <td>Tempat/Tgl Lahir</td>
                                 <td>:</td>
-                                <td>{{ $getData->pekerjaan }}</td>
-                                
+                                <td>{{ $getData->tempat_lahir }}, {{ Carbon\Carbon::parse($getData->tgl_lahir)->format('d-m-Y') }}</td>
                             </tr>
                             <tr>
-                                <td>Pekerjaan</td>
+                                <td>Status Perkawinan</td>
                                 <td>:</td>
                                 <td>
-                                    @if (is_null($getData->tempat_pekerjaan))
-                                        Tidak Bekerja di Tempat Lain
-                                    @else
-                                        {{ $getData->tempat_pekerjaan }}
+                                    @if ( $getData->status_perkawinan == 'Kawin') 
+                                        Kawin
+                                    @elseif ($getData->status_perkawinan == 'Belum_Kawin')
+                                        Belum Kawin
+                                    @elseif ($getData->status_perkawinan == 'Cerai')
+                                        Cerai
                                     @endif
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>Bidang Usaha</td>
-                                <td>:</td>
-                                <td>{{ $getData->bidang_usaha }}</td>
                                 
                             </tr>
+                            <tr>
+                                <td>Agama</td>
+                                <td>:</td>
+                                <td>
+                                    @if ( $getData->agama == 'Islam') 
+                                        Islam
+                                    @elseif ($getData->agama == 'Khatolik')
+                                        Khatolik
+                                    @elseif ($getData->agama == 'Kristen')
+                                        Kristen
+                                    @elseif ($getData->agama == 'Buddha')
+                                        Buddha
+                                    @elseif ($getData->agama == 'Hindu')
+                                        Hindu
+                                    @elseif ($getData->agama == 'Agama_Kepercayaan')
+                                        Agama Kepercayaan
+                                    @endif
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td>Alamat</td>
+                                <td>:</td>
+                                <td>{{ $getData->alamat }}</td>
+                            </tr>
+                            <tr>
+                                <td>Pekerjaan</td>
+                                <td>:</td>
+                                <td>{{ $getData->pekerjaan_pemohon }}</td>
+                            </tr>
                         </table>
-                        <a href="{{ url('/surat-usaha') }}" class="btn btn-success btn-sm">Kembali <i class="bi bi-arrow-return-left"></i></a>
+                        <a href="{{ url('/surat-tidak-mampu') }}" class="btn btn-success btn-sm">Kembali <i class="bi bi-arrow-return-left"></i></a>
                     </div>
                 </div>  
             </div>

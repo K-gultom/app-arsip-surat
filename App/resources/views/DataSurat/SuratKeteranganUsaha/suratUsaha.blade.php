@@ -21,7 +21,8 @@
                         <strong>Surat</strong> Usaha <i class="bi bi-envelope"></i>
                     </div>
                     <div class="w-100 pt-1 text-end"> 
-                        <a href="{{ url('/surat-usaha') }}" class="btn btn-primary btn-sm">Refresh Data <i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/surat-usaha') }}" class="btn btn-primary btn-sm"><i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="{{ url('/surat-keluar') }}" class="btn btn-success btn-sm">Kembali <i class="bi bi-arrow-return-left"></i></a>
                     </div>
                 </div>
             </div>
@@ -74,49 +75,49 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th class="text-center">No</th>
                             <th>No Surat</th>
                             <th>Nama</th>
-                            <th>NIK</th>
-                            <th>Tgl Surat</th>
-                            <th>Aksi</th>
+                            <th class="text-center">NIK</th>
+                            <th class="text-center">Tgl Surat</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($getSurat as $item)
+                        @foreach ($getData as $item)
                                 <tr>
-                                    <td>
-                                        {{ (($getSurat->currentPage() - 1) * $getSurat->perPage()) + $loop->iteration }} 
+                                    <td class="text-center">
+                                        {{ (($getData->currentPage() - 1) * $getData->perPage()) + $loop->iteration }} 
                                     </td>
                                     <td>{{$item->nomor_surat}} </td>
-                                    <td>{{$item->tgl_surat}} </td>
-                                    <td>{{$item->perihal}} </td>
-                                    <td>{{$item->getPengirim->name}} </td>
-                                    <td>{{$item->getPenerima->nama_bagian}} </td>
+                                    <td>{{$item->nama_lengkap}} </td>
+                                    <td class="text-center">{{$item->nik}} </td>
+                                  
+                                    <td class="text-center">{{ Carbon\Carbon::parse($item->tanggal_surat_dibuat)->format('d/m/Y') }}</td>
 
-                                    <td class="text-center">
-                                        <a class="btn btn-outline-info btn-sm" href="{{ asset('/assets/SuratKeluar/' . $item->file_surat) }}" target="_blank">File PDF Surat</a>
-                                    </td>
                                     
                                     @if (Auth::user()->level == "User")
                                         <td class="text-center">
-                                            <a href="{{ url('/surat-keluar/data') }}/{{ $item->id }}" class="btn btn-success btn-sm" title="Lihat Data">
+                                            <a href="{{ url('/surat-usaha/cetak') }}/{{ $item->id }}" class="btn btn-primary btn-sm" title="Download Surat">
+                                                <i class="bi bi-printer"></i>
+                                            </a>
+                                            <a href="{{ url('/surat-usaha/data') }}/{{ $item->id }}" class="btn btn-success btn-sm" title="Lihat Data">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ url('/surat-keluar/edit') }}/{{ $item->id }}" class="btn btn-warning btn-sm" title="Edit">
+                                            <a href="{{ url('/surat-usaha/edit') }}/{{ $item->id }}" class="btn btn-warning btn-sm" title="Edit">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <a href="{{ url('/surat-keluar/destroy') }}/{{ $item->id }}" class="btn btn-danger btn-sm" title="Hapus" 
+                                            <a href="{{ url('/surat-usaha/del') }}/{{ $item->id }}" class="btn btn-danger btn-sm" title="Hapus" 
                                                 onclick="return confirm('Hapus Data ???');">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </td>
                                     @endif
                                 </tr>   
-                            @endforeach --}}
+                            @endforeach
                     </tbody>
                 </table>
-                {{-- {{$getSurat->links()}} --}}
+                {{$getData->links()}}
             </div>
         </div> 
     </div>

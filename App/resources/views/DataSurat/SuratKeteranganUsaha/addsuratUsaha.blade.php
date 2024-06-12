@@ -34,14 +34,14 @@
                                                         <select name="tanda_tangan" class="form-control @error('pengirim') is-invalid @enderror" id="pengirim">
                                                             <option value=""></option>
                                                             @foreach ($getUser as $tandaTangan)
-                                                                <option value="{{ $tandaTangan->id }}" {{ old('tandaTangan') == $tandaTangan->id ? 'selected' : ''}}>
+                                                                <option value="{{ $tandaTangan->id }}" {{ old('tanda_tangan') == $tandaTangan->id ? 'selected' : ''}}>
                                                                     {{ $tandaTangan->Jabatan }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
                                                     <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
                                                     </div>
-                                                    @error('tandaTangan')
+                                                    @error('tanda_tangan')
                                                       <div class="invalid-feedback">
                                                         {{$message}}
                                                       </div>
@@ -84,7 +84,7 @@
                             </div>
 
 
-                            <div class="row">
+                            <div class="row mb-4">
                                 <div class="col">
                                     <table class="table table-borderless">
                                         <tr>
@@ -105,7 +105,7 @@
                                             <td>NIK</td>
                                             <td>
                                                 <div class="form-outline">
-                                                    <input type="number" value="{{ old('nik') }}" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" maxlength="16" oninput="validateLength(this)"/>
+                                                    <input type="text" value="{{ old('nik') }}" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" maxlength="16" oninput="validateLength(this)"/>
                                                     @error('nik')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
@@ -250,9 +250,11 @@
                                     </table>
                                 </div>
                             </div>
+
                             <button type="submit" class="btn btn-primary btn-sm">Simpan <i class="bi bi-check-lg"></i></button>
                             <button type="reset" class="btn btn-warning btn-sm">Reset <i class="bi bi-x"></i></button>
                             <a href="{{ url('/surat-usaha') }}" class="btn btn-success btn-sm mx-2">Kembali <i class="bi bi-arrow-return-left"></i></a>
+
                         </form>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
-            'name' => 'Ulil Amri',
+            'name' => 'Ulil Amri, S.T',
             'Jabatan' => 'Kepala Desa',
             'alamat' => 'Dusun I Blok A Desa Karya Mukti',
             'telp' => '082221493099',
