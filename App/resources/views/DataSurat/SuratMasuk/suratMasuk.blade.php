@@ -85,10 +85,7 @@
                             <th>Pengirim</th>
                             <th>Penerima</th>
                             <th class="text-center">File Surat</th>
-                            {{-- Only Can See by Admin --}}
-                            @if (Auth::user()->level == "Admin")
-                                <th class="text-center">Aksi</th>
-                            @endif
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -119,6 +116,13 @@
                                             <a href="{{ url('/surat-masuk/destroy') }}/{{ $item->id }}" class="btn btn-danger btn-sm" title="Hapus" 
                                                 onclick="return confirm('Hapus Data ???');">
                                                 <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    @endif
+                                    @if (Auth::user()->level == "Super_Admin" || Auth::user()->level == "Admin")
+                                        <td class="text-center">
+                                            <a href="{{ url('/surat-masuk/data') }}/{{ $item->id }}" class="btn btn-success btn-sm" title="Lihat Data">
+                                                <i class="bi bi-eye"></i>
                                             </a>
                                         </td>
                                     @endif

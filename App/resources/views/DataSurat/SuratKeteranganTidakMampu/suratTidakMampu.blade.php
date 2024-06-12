@@ -113,6 +113,16 @@
                                             </a>
                                         </td>
                                     @endif
+                                    @if (Auth::user()->level == "Super_Admin" || Auth::user()->level == "Admin")
+                                        <td class="text-center">
+                                            <a href="{{ url('/surat-tidak-mampu/cetak') }}/{{ $item->id }}" class="btn btn-primary btn-sm" title="Download Surat">
+                                                <i class="bi bi-printer"></i>
+                                            </a>
+                                            <a href="{{ url('/surat-tidak-mampu/data') }}/{{ $item->id }}" class="btn btn-success btn-sm" title="Lihat Data">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                        </td>
+                                    @endif
                                 </tr>   
                             @endforeach
                     </tbody>

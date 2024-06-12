@@ -21,53 +21,21 @@ use Illuminate\Support\Facades\Route;
 
             //  Surat Keterangan Usaha
             Route::get('/surat-usaha', [DataSuratController::class, 'surat_usaha']);
-            
-            Route::get('/surat-usaha/add', [DataSuratController::class, 'surat_usaha_add']);
-            Route::post('/surat-usaha/add', [DataSuratController::class, 'surat_usaha_add_save']);
-
-            Route::get('/surat-usaha/edit/{id}', [DataSuratController::class, 'surat_usaha_edit']);
-            Route::post('/surat-usaha/edit/{id}', [DataSuratController::class, 'surat_usaha_edit_save']);
-
             Route::get('/surat-usaha/data/{id}', [DataSuratController::class, 'surat_usaha_lihat_data']);
-
             Route::get('/surat-usaha/cetak/{id}', [DataSuratController::class, 'cetak_surat_usaha']);
 
-            Route::get('/surat-usaha/del/{id}', [DataSuratController::class, 'hapus_surat_usaha']);
-
-        
 
         // Surat Keterangan Tidak Mampu
         Route::get('/surat-tidak-mampu', [DataSuratController::class, 'surat_tidak_mampu']);
-
-        Route::get('/surat-tidak-mampu/add', [DataSuratController::class, 'surat_tidak_mampu_add']);
-        Route::post('/surat-tidak-mampu/add', [DataSuratController::class, 'surat_tidak_mampu_add_save']);
-
-        Route::get('/surat-tidak-mampu/edit/{id}', [DataSuratController::class, 'surat_tidak_mampu_edit']);
-        Route::post('/surat-tidak-mampu/edit/{id}', [DataSuratController::class, 'surat_tidak_mampu_edit_save']);
-
         Route::get('/surat-tidak-mampu/data/{id}', [DataSuratController::class, 'surat_tidak_mampu_lihat_data']);
-
         Route::get('/surat-tidak-mampu/cetak/{id}', [DataSuratController::class, 'cetak_surat_tidak_mampu']);
-
-        Route::get('/surat-tidak-mampu/del/{id}', [DataSuratController::class, 'hapus_surat_tidak_mampu']);
-
-
 
 
             // Surat Keterangan Domisili
             Route::get('/surat-domisili', [DataSuratController::class, 'surat_domisili']);
-
-            Route::get('/surat-domisili/add', [DataSuratController::class, 'surat_domisili_add']);
-            Route::post('/surat-domisili/add', [DataSuratController::class, 'surat_domisili_add_save']);
-
-            Route::get('/surat-domisili/edit/{id}', [DataSuratController::class, 'surat_domisili_edit']);
-            Route::post('/surat-domisili/edit/{id}', [DataSuratController::class, 'surat_domisili_edit_save']);
-
             Route::get('/surat-domisili/data/{id}', [DataSuratController::class, 'surat_domisili_lihat_data']);
-
             Route::get('/surat-domisili/cetak/{id}', [DataSuratController::class, 'cetak_surat_domisili']);
-
-            Route::get('/surat-domisili/del/{id}', [DataSuratController::class, 'hapus_surat_domisili']);
+           
     });
 
 
@@ -77,6 +45,15 @@ use Illuminate\Support\Facades\Route;
          * Routing untuk tombol Logout
          */
         Route::get('/logout', [AuthController::class, 'logout']);
+
+
+
+        //surat masuk (lihat data)
+        Route::get('/surat-masuk/data/{id}', [DataSuratController::class, 'lihatDataSurat']);
+
+        //surat keluar (lihat data)
+        Route::get('/surat-keluar/data/{id}', [DataSuratController::class, 'lihatDataSuratKeluar']);
+
     });
 
     Route::middleware(['auth:','cekLevel:Super_Admin'])->group(function () {
@@ -128,8 +105,6 @@ use Illuminate\Support\Facades\Route;
             Route::get('/surat-masuk/add', [DataSuratController::class, 'addSuratMasuk']);
             Route::post('/surat-masuk/add', [DataSuratController::class, 'addSuratMasuk_save']);
 
-            Route::get('/surat-masuk/data/{id}', [DataSuratController::class, 'lihatDataSurat']);
-            
             Route::get('/surat-masuk/edit/{id}', [DataSuratController::class, 'dataSuratMasukEdit']);
             Route::post('/surat-masuk/edit/{id}', [DataSuratController::class, 'dataSuratMasukEdit_save']);
 
@@ -146,12 +121,42 @@ use Illuminate\Support\Facades\Route;
             Route::get('/surat-keluar/add', [DataSuratController::class, 'addSuratKeluar']);
             Route::post('/surat-keluar/add', [DataSuratController::class, 'addSuratKeluar_save']);
 
-            Route::get('/surat-keluar/data/{id}', [DataSuratController::class, 'lihatDataSuratKeluar']);
-
             Route::get('/surat-keluar/edit/{id}', [DataSuratController::class, 'dataSuratKeluarEdit']);
             Route::post('/surat-keluar/edit/{id}', [DataSuratController::class, 'dataSuratKeluarEdit_save']);
 
             Route::get('/surat-keluar/destroy/{id}', [DataSuratController::class, 'destroySuratKeluar']);
+
+
+            // surat Keterangan Usaha
+            Route::get('/surat-usaha/add', [DataSuratController::class, 'surat_usaha_add']);
+            Route::post('/surat-usaha/add', [DataSuratController::class, 'surat_usaha_add_save']);
+
+            Route::get('/surat-usaha/edit/{id}', [DataSuratController::class, 'surat_usaha_edit']);
+            Route::post('/surat-usaha/edit/{id}', [DataSuratController::class, 'surat_usaha_edit_save']);
+
+            Route::get('/surat-usaha/del/{id}', [DataSuratController::class, 'hapus_surat_usaha']);
+
+
+                //Surat Keterangan Tidak Mampu
+                Route::get('/surat-tidak-mampu/add', [DataSuratController::class, 'surat_tidak_mampu_add']);
+                Route::post('/surat-tidak-mampu/add', [DataSuratController::class, 'surat_tidak_mampu_add_save']);
+        
+                Route::get('/surat-tidak-mampu/edit/{id}', [DataSuratController::class, 'surat_tidak_mampu_edit']);
+                Route::post('/surat-tidak-mampu/edit/{id}', [DataSuratController::class, 'surat_tidak_mampu_edit_save']);
+
+                Route::get('/surat-tidak-mampu/del/{id}', [DataSuratController::class, 'hapus_surat_tidak_mampu']);
+
+
+            //Surat Keterangan Domisili
+            Route::get('/surat-domisili/add', [DataSuratController::class, 'surat_domisili_add']);
+            Route::post('/surat-domisili/add', [DataSuratController::class, 'surat_domisili_add_save']);
+
+            Route::get('/surat-domisili/edit/{id}', [DataSuratController::class, 'surat_domisili_edit']);
+            Route::post('/surat-domisili/edit/{id}', [DataSuratController::class, 'surat_domisili_edit_save']);
+
+            Route::get('/surat-domisili/del/{id}', [DataSuratController::class, 'hapus_surat_domisili']);
+
+
     });
 
     Route::middleware(['auth:','cekLevel:Super_Admin,Admin'])->group(function () {
