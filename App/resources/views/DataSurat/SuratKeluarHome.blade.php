@@ -51,7 +51,7 @@
                     <img src="{{ url('assets/images/surat.png') }}" class="card-img-top" alt="..." style="width: 100px; height: 100px;">
                     <div class="card-body">
                         <h5 class="card-title">Surat Keterangan Domisili </h5>
-                        <a href="#" class="btn btn-success btn-sm">Lihat Data</a>
+                        <a href="{{ url('/surat-domisili') }}" class="btn btn-success btn-sm">Lihat Data</a>
                         {{-- <a href="#" class="btn btn-primary btn-sm">Buat Surat</a> --}}
                     </div>
                 </div>

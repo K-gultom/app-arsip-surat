@@ -133,12 +133,12 @@
 
         <div class="container">
             <center>
-                <h3><u>SURAT KETERANGAN TIDAK MAMPU</u></h3>Nomor: {{ $getData->nomor_surat }}
+                <h3><u>SURAT KETERANGAN DOMISILI</u></h3>Nomor: {{ $getData->nomor_surat }}
             </center>
         </div>
 
         <div class="awal tab" style="text-align: justify">
-            <p>Yang bertanda tangan di bawah ini Kepala Desa Karya Mukti Kecamatan Mesuji Kabupaten Ogan Komering Ilir menerangkan bahwa:</p>
+            <p>Yang bertanda tangan dibawah ini Kepala Desa Karya Mukti,Kecamatan Mesuji Kabupaten Ogan Komering Ilir, menerangkan bahwa :</p>
         </div>
 
         <div class="kedua">
@@ -171,19 +171,17 @@
                     
                 </tr>
                 <tr>
-                    <td>Status Perkawinan</td>
+                    <td>Kewarganegaraan</td>
                     <td>:</td>
                     <td>
-                        @if ( $getData->status_perkawinan == 'Kawin') 
-                            Kawin
-                        @elseif ($getData->status_perkawinan == 'Belum_Kawin')
-                            Belum Kawin
-                        @elseif ($getData->status_perkawinan == 'Cerai')
-                            Cerai
+                        @if ( $getData->kewarganegaraan == 'WNI') 
+                            WNI
+                        @else
+                            WNA
                         @endif
                     </td>
-                    
                 </tr>
+
                 <tr>
                     <td>Agama</td>
                     <td>:</td>
@@ -204,11 +202,27 @@
                     </td>
                     
                 </tr>
+
                 <tr>
                     <td>Pekerjaan</td>
                     <td>:</td>
                     <td>{{ $getData->pekerjaan_pemohon }}</td>
                 </tr>
+
+                <tr>
+                    <td>Status Perkawinan</td>
+                    <td>:</td>
+                    <td>
+                        @if ( $getData->status_perkawinan == 'Kawin') 
+                            Kawin
+                        @elseif ($getData->status_perkawinan == 'Belum_Kawin')
+                            Belum Kawin
+                        @elseif ($getData->status_perkawinan == 'Cerai')
+                            Cerai
+                        @endif
+                    </td>
+                </tr>
+                
                 <tr>
                     <td>Alamat</td>
                     <td>:</td>
@@ -220,7 +234,7 @@
 
         <div class="ketiga tab" style="text-align: justify">
             <p>
-                Nama tersebut di atas memang benar warga Desa Karya Mukti Kecamatan Mesuji Kabupaten Ogan Komering Ilir, yang benar-benar tidak mampu ekonominya dan tidak memiliki pekerjaan tetap.
+                Bahwa Nama tersebut diatas adalah benar bertempat tinggal/ Berdomisili di Desa Karya Mukti, Kecamatan Mesuji Kabupaten Ogan Komering Ilir.
             </p>
         </div>
 
@@ -238,7 +252,7 @@
 
         <div class="kelima tab" style="text-align: justify">
             <p>
-                Demikian Surat Keterangan  ini di buat agar dapat dipergunakan sebagai manamestinya.
+                Demikian Surat Keterangan Domisili ini dibuat dengan sebenarnya untuk dapat dipergunakan sesuai keperluan.
             </p>
         </div>
 

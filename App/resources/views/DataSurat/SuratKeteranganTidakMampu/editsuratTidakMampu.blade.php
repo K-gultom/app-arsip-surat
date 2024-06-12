@@ -243,9 +243,8 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-sm">Simpan <i class="bi bi-check-lg"></i></button>
-                            <button type="reset" class="btn btn-warning btn-sm">Reset <i class="bi bi-x"></i></button>
-                            <a href="{{ url('/surat-tidak-mampu') }}" class="btn btn-success btn-sm mx-2">Kembali <i class="bi bi-arrow-return-left"></i></a>
+                            <button type="submit" class="btn btn-primary btn-sm">Update <i class="bi bi-check-lg"></i></button>
+                            <a href="{{ url('/surat-tidak-mampu') }}" class="btn btn-success btn-sm">Kembali <i class="bi bi-arrow-return-left"></i></a>
 
                         </form>
                     </div>

@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Route;
 
         
 
+        // Surat Keterangan Tidak Mampu
         Route::get('/surat-tidak-mampu', [DataSuratController::class, 'surat_tidak_mampu']);
 
         Route::get('/surat-tidak-mampu/add', [DataSuratController::class, 'surat_tidak_mampu_add']);
@@ -53,8 +54,20 @@ use Illuminate\Support\Facades\Route;
 
 
 
-        
+            // Surat Keterangan Domisili
             Route::get('/surat-domisili', [DataSuratController::class, 'surat_domisili']);
+
+            Route::get('/surat-domisili/add', [DataSuratController::class, 'surat_domisili_add']);
+            Route::post('/surat-domisili/add', [DataSuratController::class, 'surat_domisili_add_save']);
+
+            Route::get('/surat-domisili/edit/{id}', [DataSuratController::class, 'surat_domisili_edit']);
+            Route::post('/surat-domisili/edit/{id}', [DataSuratController::class, 'surat_domisili_edit_save']);
+
+            Route::get('/surat-domisili/data/{id}', [DataSuratController::class, 'surat_domisili_lihat_data']);
+
+            Route::get('/surat-domisili/cetak/{id}', [DataSuratController::class, 'cetak_surat_domisili']);
+
+            Route::get('/surat-domisili/del/{id}', [DataSuratController::class, 'hapus_surat_domisili']);
     });
 
 

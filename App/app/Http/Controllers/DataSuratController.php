@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bagian;
+use App\Models\surat_domisili;
 use App\Models\surat_tidak_mampu;
 use App\Models\suratKeluar;
 use App\Models\suratMasuk;
@@ -629,6 +630,7 @@ class DataSuratController extends Controller
         $new->save();
     
         return redirect('/surat-tidak-mampu')->with('message', 'Surat Tidak Mampu berhasil ditambahkan dengan nomor surat: ' . $nomorSurat);
+    
     }
 
     public function surat_tidak_mampu_edit($id) {
@@ -696,6 +698,7 @@ class DataSuratController extends Controller
         $new->save();
     
         return redirect('/surat-tidak-mampu')->with('message', 'Surat Tidak Mampu berhasil diPerbaharui dengan nomor surat: ' . $new->nomor_surat);
+    
     }
 
     public function surat_tidak_mampu_lihat_data($id) {
@@ -747,10 +750,193 @@ class DataSuratController extends Controller
 
 
 
+// =======================Section Surat Domisili============================
+
+    public function surat_domisili(Request $r){
+
+        $search = $r->input('search');
+
+        $getData = surat_domisili::where('nama_lengkap', 'like', "%{$search}%")
+        ->orWhere('nik', 'like', "%{$search}%")
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+
+        return view('DataSurat.SuratKeteranganDomisili.suratDomisili', compact('getData'));
+    }
+
+    public function surat_domisili_add(){
+        
+        $getUser = User::all();
+        return view('DataSurat.SuratKeteranganDomisili.addsuratDomisili', compact('getUser'));
+    
+    }
+    public function surat_domisili_add_save(Request $req){
+
+        $req->validate([
+            'tanda_tangan' => 'required|exists:users,id',
+            'nama_lengkap' => 'required|min:3',
+            'nik' => 'required|numeric',
+            'tempat_lahir' => 'required|min:2',
+            'tgl_lahir' => 'required|date',
+            'jenis_kelamin' => 'required',
+            'kewarganegaraan' => 'required',
+            'agama' => 'required',
+            'status_perkawinan' => 'required',
+            'pekerjaan_pemohon' => 'required',
+            'alamat' => 'required',
+            'tgl_surat_dibuat' => 'required|date',
+        ]);
+
+        // Extract bulan dan tahun dari tanggal_surat_dibuat
+        $tanggalSuratDibuat = Carbon::parse($req->tgl_surat_dibuat);
+        $bulanSuratDibuat = $tanggalSuratDibuat->format('m');
+        $tahunSuratDibuat = $tanggalSuratDibuat->format('Y');
+    
+        // Hitung nomor surat berdasarkan urutan surat per bulan
+        $countSuratBulanIni = surat_domisili::whereYear('tgl_surat_dibuat', $tahunSuratDibuat)
+            ->whereMonth('tgl_surat_dibuat', $bulanSuratDibuat)
+            ->count();
+        $nomorSuratBerikutnya = $countSuratBulanIni + 1;
+    
+        // Susun nomor surat
+        $nomorSurat = sprintf("140/%03d/KM-MES/%02d/%s", 
+            $nomorSuratBerikutnya, 
+            $bulanSuratDibuat, 
+            $tahunSuratDibuat);
+        
+        $new = new surat_domisili();
+        $new->tanda_tangan = $req->tanda_tangan;
+        $new->nomor_surat = $nomorSurat;
+        $new->nama_lengkap = $req->nama_lengkap;
+        $new->nik = $req->nik;
+        $new->tempat_lahir = $req->tempat_lahir;
+        $new->tgl_lahir = $req->tgl_lahir;
+        $new->jenis_kelamin = $req->jenis_kelamin;
+        $new->kewarganegaraan = $req->kewarganegaraan;
+        $new->agama = $req->agama;
+        $new->status_perkawinan = $req->status_perkawinan;
+        $new->pekerjaan_pemohon = $req->pekerjaan_pemohon;
+        $new->alamat = $req->alamat;
+        $new->tgl_surat_dibuat = $req->tgl_surat_dibuat;
+        $new->save();
 
 
-    public function surat_domisili(){
+        // dd($new);
+
+        return redirect('/surat-domisili')->with('message', 'Surat Keterangan Domisili berhasil dibuat dengan nomor surat: ' . $nomorSurat);
+    
+    }
+
+
+    public function surat_domisili_edit($id){
+
+        $getData = surat_domisili::with('getUser')->find($id);
+        $getUser = User::all(); 
+
+        return view('DataSurat.SuratKeteranganDomisili.editsuratDomisili', compact('getData','getUser'));
+    
+    }
+    public function surat_domisili_edit_save(Request $req, $id){
+
+        $req->validate([
+            'tanda_tangan' => 'required|exists:users,id',
+            'nama_lengkap' => 'required|min:3',
+            'nik' => 'required|numeric',
+            'tempat_lahir' => 'required|min:2',
+            'tgl_lahir' => 'required|date',
+            'jenis_kelamin' => 'required',
+            'kewarganegaraan' => 'required',
+            'agama' => 'required',
+            'status_perkawinan' => 'required',
+            'pekerjaan_pemohon' => 'required',
+            'alamat' => 'required',
+            'tgl_surat_dibuat' => 'required|date',
+        ]);
+
+        $new = surat_domisili::find($id);
+
+        if ($req->tgl_surat_dibuat != $new->tgl_surat_dibuat) {
+            // Extract bulan dan tahun dari tanggal_surat_dibuat
+            $tanggalSuratDibuat = Carbon::parse($req->tgl_surat_dibuat);
+            $bulanSuratDibuat = $tanggalSuratDibuat->format('m');
+            $tahunSuratDibuat = $tanggalSuratDibuat->format('Y');
+
+            // Hitung nomor surat berdasarkan urutan surat per bulan
+            $countSuratBulanIni = surat_tidak_mampu::whereYear('tgl_surat_dibuat', $tahunSuratDibuat)
+                ->whereMonth('tgl_surat_dibuat', $bulanSuratDibuat)
+                ->count();
+            $nomorSuratBerikutnya = $countSuratBulanIni + 1;
+
+            // Susun nomor surat
+            $nomorSurat = sprintf("140/%03d/KM-MES/%02d/%s", 
+                $nomorSuratBerikutnya, 
+                $bulanSuratDibuat, 
+                $tahunSuratDibuat
+            );
+
+
+            // Perbarui nomor surat
+            $new->nomor_surat = $nomorSurat;
+        }
+
+        $new->tanda_tangan = $req->tanda_tangan;
+        $new->nama_lengkap = $req->nama_lengkap;
+        $new->nik = $req->nik;
+        $new->tempat_lahir = $req->tempat_lahir;
+        $new->tgl_lahir = $req->tgl_lahir;
+        $new->jenis_kelamin = $req->jenis_kelamin;
+        $new->kewarganegaraan = $req->kewarganegaraan;
+        $new->agama = $req->agama;
+        $new->status_perkawinan = $req->status_perkawinan;
+        $new->pekerjaan_pemohon = $req->pekerjaan_pemohon;
+        $new->alamat = $req->alamat;
+        $new->tgl_surat_dibuat = $req->tgl_surat_dibuat;
+        $new->save();
+
+        return redirect('/surat-domisili')->with('message', 'Surat Keterangan Domisili berhasil diPerbaharui dengan nomor surat: ' . $new->nomor_surat);
+    
+    }
+
+    public function surat_domisili_lihat_data($id){
+        $getData = surat_domisili::with('getUser')->find($id);
+        $getUser = User::all();
+        
+        return view('DataSurat.SuratKeteranganDomisili.lihatsuratDomisili', compact('getData', 'getUser'));
 
     }
 
+    public function cetak_surat_domisili($id){
+
+        $getData = surat_domisili::with('getUser')->find($id);
+         // Atur lokal Carbon ke Bahasa Indonesia
+         Carbon::setLocale('id');
+
+         // Mendapatkan tanggal hari ini dengan nama bulan dalam bahasa Indonesia
+         $tanggal_Surat = Carbon::parse($getData->tgl_surat_dibuat)->translatedFormat('d F Y'); // Format tanggal sesuai kebutuhan Anda
+         
+         $data = [
+             'getData' => $getData,
+             // 'getUser' => $getUser,
+             'tanggal_Surat' => $tanggal_Surat, // Tambahkan tanggal hari ini ke data yang dikirim ke view
+         ];
+         
+         // Load the view, render PDF content, and prepare headers
+         $pdf = FacadePdf::loadView('DataSurat.SuratKeteranganDomisili.cetaksuratDomisili', $data);
+         $content = $pdf->output();
+ 
+         $headers = [
+             'Content-Type' => 'application/pdf',
+             'Content-Disposition' => 'attachment; filename="Surat_Keterangan_Domisili.pdf"',
+         ];
+ 
+         // Return response with appropriate headers for new tab download
+         return response($content, 200, $headers)
+             ->header('Content-Type', 'application/pdf')
+             ->header('Content-Disposition', 'attachment; filename="Surat_Keterangan_Domisili.pdf"');
+     
+    }
+
+    public function hapus_surat_domisili($id){
+
+    }
 }
