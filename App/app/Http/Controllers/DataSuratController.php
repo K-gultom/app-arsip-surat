@@ -770,8 +770,8 @@ class DataSuratController extends Controller
         return view('DataSurat.SuratKeteranganDomisili.addsuratDomisili', compact('getUser'));
     
     }
-    public function surat_domisili_add_save(Request $req){
 
+    public function surat_domisili_add_save(Request $req){
         $req->validate([
             'tanda_tangan' => 'required|exists:users,id',
             'nama_lengkap' => 'required|min:3',
@@ -791,17 +791,30 @@ class DataSuratController extends Controller
         $tanggalSuratDibuat = Carbon::parse($req->tgl_surat_dibuat);
         $bulanSuratDibuat = $tanggalSuratDibuat->format('m');
         $tahunSuratDibuat = $tanggalSuratDibuat->format('Y');
-    
+
         // Hitung nomor surat berdasarkan urutan surat per bulan
         $countSuratBulanIni = surat_domisili::whereYear('tgl_surat_dibuat', $tahunSuratDibuat)
             ->whereMonth('tgl_surat_dibuat', $bulanSuratDibuat)
             ->count();
         $nomorSuratBerikutnya = $countSuratBulanIni + 1;
-    
+
+        // Fungsi untuk mengubah bulan menjadi format Romawi
+        function bulanRomawi($bulan)
+        {
+            $bulanRomawi = [
+                1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV',
+                5 => 'V', 6 => 'VI', 7 => 'VII', 8 => 'VIII',
+                9 => 'IX', 10 => 'X', 11 => 'XI', 12 => 'XII'
+            ];
+            return $bulanRomawi[intval($bulan)];
+        }
+
+        $bulanSuratDibuatRomawi = bulanRomawi($bulanSuratDibuat);
+
         // Susun nomor surat
-        $nomorSurat = sprintf("140/%03d/KM-MES/%02d/%s", 
+        $nomorSurat = sprintf("140/%03d/KM-MES/%s/%s", 
             $nomorSuratBerikutnya, 
-            $bulanSuratDibuat, 
+            $bulanSuratDibuatRomawi, 
             $tahunSuratDibuat);
         
         $new = new surat_domisili();
@@ -820,12 +833,11 @@ class DataSuratController extends Controller
         $new->tgl_surat_dibuat = $req->tgl_surat_dibuat;
         $new->save();
 
-
         // dd($new);
 
         return redirect('/surat-domisili')->with('message', 'Surat Keterangan Domisili berhasil dibuat dengan nomor surat: ' . $nomorSurat);
-    
     }
+
 
 
     public function surat_domisili_edit($id){
