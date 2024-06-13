@@ -119,7 +119,7 @@
         
         <table class="tabelKopSurat">
             <tr class="barisKop">
-                <td class="kanan"><img class="abc" src="assets/images/logoKop.jpg" alt=""></td>
+                <td class="kanan"><img class="abc" src="assets/images/bende.jpg" alt=""></td>
                 <td class="kiri">
                     <div class="pemprov">PEMERINTAH KABUPATEN OGAN KEMERING ILIR</div>
                     <div class="oki">KECAMATAN MESUJI</div>
