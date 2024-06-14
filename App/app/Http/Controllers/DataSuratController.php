@@ -424,12 +424,25 @@ class DataSuratController extends Controller
                                         ->count();
         $nomorSuratBerikutnya = $countSuratBulanIni + 1;
     
+        // Fungsi untuk mengubah bulan menjadi format Romawi
+        function bulanRomawiSuratUsaha($bulan)
+        {
+            $bulanRomawi = [
+                1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV',
+                5 => 'V', 6 => 'VI', 7 => 'VII', 8 => 'VIII',
+                9 => 'IX', 10 => 'X', 11 => 'XI', 12 => 'XII'
+            ];
+            return $bulanRomawi[intval($bulan)];
+        }
+
+        $bulanSuratDibuatRomawi = bulanRomawiSuratUsaha($bulanSuratDibuat);
+
         // Susun nomor surat
-        $nomorSurat = sprintf("140/%03d/KM-MES/%02d/%s", 
-                                $nomorSuratBerikutnya, 
-                                $bulanSuratDibuat, 
-                                $tahunSuratDibuat);
-    
+        $nomorSurat = sprintf("140/%03d/KM-MES/%s/%s", 
+            $nomorSuratBerikutnya, 
+            $bulanSuratDibuatRomawi, 
+            $tahunSuratDibuat);
+        
         // Simpan data baru ke database
         $new = new suratusaha();
         $new->nomor_surat = $nomorSurat;
@@ -477,8 +490,11 @@ class DataSuratController extends Controller
     
         // Temukan data surat usaha berdasarkan id
         $suratUsaha = suratusaha::find($id);
-        
-        // Periksa apakah tanggal surat diubah
+        if (!$suratUsaha) {
+            return redirect('/surat-usaha')->withErrors('Data surat usaha tidak ditemukan.');
+        }
+    
+        // Check if the tanggal_surat_dibuat is changed
         if ($req->tanggal_surat_dibuat != $suratUsaha->tanggal_surat_dibuat) {
             // Extract bulan dan tahun dari tanggal_surat_dibuat
             $tanggalSuratDibuat = Carbon::parse($req->tanggal_surat_dibuat);
@@ -491,12 +507,23 @@ class DataSuratController extends Controller
                                             ->count();
             $nomorSuratBerikutnya = $countSuratBulanIni + 1;
     
+            // Fungsi untuk mengubah bulan menjadi format Romawi
+            function bulanRomawiSuratUsaha($bulan) {
+                $bulanRomawi = [
+                    1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV',
+                    5 => 'V', 6 => 'VI', 7 => 'VII', 8 => 'VIII',
+                    9 => 'IX', 10 => 'X', 11 => 'XI', 12 => 'XII'
+                ];
+                return $bulanRomawi[intval($bulan)];
+            }
+    
+            $bulanSuratDibuatRomawi = bulanRomawiSuratUsaha($bulanSuratDibuat);
+    
             // Susun nomor surat
-            $nomorSurat = sprintf("140/%03d/KM-MES/%02d/%s", 
+            $nomorSurat = sprintf("140/%03d/KM-MES/%s/%s", 
                 $nomorSuratBerikutnya, 
-                $bulanSuratDibuat, 
-                $tahunSuratDibuat
-            );
+                $bulanSuratDibuatRomawi, 
+                $tahunSuratDibuat);
     
             // Perbarui nomor surat
             $suratUsaha->nomor_surat = $nomorSurat;
@@ -514,11 +541,13 @@ class DataSuratController extends Controller
         $suratUsaha->pekerjaan = $req->pekerjaan;
         $suratUsaha->tempat_pekerjaan = $req->tempat_pekerjaan;
         $suratUsaha->bidang_usaha = $req->bidang_usaha;
+        
+        // Save the updated data
         $suratUsaha->save();
     
-        // Redirect atau kembalikan respons yang sesuai
+        // Redirect or return the appropriate response
         return redirect('/surat-usaha')->with('message', 'Surat Usaha berhasil diperbaharui dengan nomor surat: ' . $suratUsaha->nomor_surat);
-    }
+    }    
 
     public function cetak_surat_usaha($id) {
 
@@ -608,10 +637,24 @@ class DataSuratController extends Controller
             ->count();
         $nomorSuratBerikutnya = $countSuratBulanIni + 1;
     
+        
+        // Fungsi untuk mengubah bulan menjadi format Romawi
+        function bulanRomawiSuratTidakMampu($bulan)
+        {
+            $bulanRomawi = [
+                1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV',
+                5 => 'V', 6 => 'VI', 7 => 'VII', 8 => 'VIII',
+                9 => 'IX', 10 => 'X', 11 => 'XI', 12 => 'XII'
+            ];
+            return $bulanRomawi[intval($bulan)];
+        }
+
+        $bulanSuratDibuatRomawi = bulanRomawiSuratTidakMampu($bulanSuratDibuat);
+
         // Susun nomor surat
-        $nomorSurat = sprintf("140/%03d/KM-MES/%02d/%s", 
+        $nomorSurat = sprintf("140/%03d/KM-MES/%s/%s", 
             $nomorSuratBerikutnya, 
-            $bulanSuratDibuat, 
+            $bulanSuratDibuatRomawi, 
             $tahunSuratDibuat);
     
         $new = new surat_tidak_mampu();
@@ -642,7 +685,7 @@ class DataSuratController extends Controller
     
     }
     public function surat_tidak_mampu_edit_save(Request $req, $id) {
-
+        // Validasi input
         $req->validate([
             'tanda_tangan' => 'required|exists:users,id',
             'nama_lengkap' => 'required|min:3',
@@ -657,49 +700,67 @@ class DataSuratController extends Controller
             'tgl_surat_dibuat' => 'required|date',
         ]);
     
-        
-        $new = surat_tidak_mampu::find($id);
-
-        if ($req->tgl_surat_dibuat != $new->tgl_surat_dibuat) {
+        // Temukan data surat tidak mampu berdasarkan id
+        $suratTidakMampu = surat_tidak_mampu::find($id);
+        if (!$suratTidakMampu) {
+            return redirect('/surat-tidak-mampu')->withErrors('Data surat tidak mampu tidak ditemukan.');
+        }
+    
+        // Check if the tgl_surat_dibuat is changed
+        if ($req->tgl_surat_dibuat != $suratTidakMampu->tgl_surat_dibuat) {
             // Extract bulan dan tahun dari tanggal_surat_dibuat
             $tanggalSuratDibuat = Carbon::parse($req->tgl_surat_dibuat);
             $bulanSuratDibuat = $tanggalSuratDibuat->format('m');
             $tahunSuratDibuat = $tanggalSuratDibuat->format('Y');
-
+    
             // Hitung nomor surat berdasarkan urutan surat per bulan
             $countSuratBulanIni = surat_tidak_mampu::whereYear('tgl_surat_dibuat', $tahunSuratDibuat)
                 ->whereMonth('tgl_surat_dibuat', $bulanSuratDibuat)
                 ->count();
             $nomorSuratBerikutnya = $countSuratBulanIni + 1;
-
+    
+            // Fungsi untuk mengubah bulan menjadi format Romawi
+            function bulanRomawiSuratTidakMampu($bulan) {
+                $bulanRomawi = [
+                    1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV',
+                    5 => 'V', 6 => 'VI', 7 => 'VII', 8 => 'VIII',
+                    9 => 'IX', 10 => 'X', 11 => 'XI', 12 => 'XII'
+                ];
+                return $bulanRomawi[intval($bulan)];
+            }
+    
+            $bulanSuratDibuatRomawi = bulanRomawiSuratTidakMampu($bulanSuratDibuat);
+    
             // Susun nomor surat
-            $nomorSurat = sprintf("140/%03d/KM-MES/%02d/%s", 
+            $nomorSurat = sprintf("140/%03d/KM-MES/%s/%s", 
                 $nomorSuratBerikutnya, 
-                $bulanSuratDibuat, 
-                $tahunSuratDibuat
-            );
-
-
+                $bulanSuratDibuatRomawi, 
+                $tahunSuratDibuat);
+    
             // Perbarui nomor surat
-            $new->nomor_surat = $nomorSurat;
+            $suratTidakMampu->nomor_surat = $nomorSurat;
         }
     
-        $new->tanda_tangan = $req->tanda_tangan;
-        $new->nama_lengkap = $req->nama_lengkap;
-        $new->nik = $req->nik;
-        $new->tempat_lahir = $req->tempat_lahir;
-        $new->tgl_lahir = $req->tgl_lahir;
-        $new->jenis_kelamin = $req->jenis_kelamin;
-        $new->status_perkawinan = $req->status_perkawinan;
-        $new->agama = $req->agama;
-        $new->pekerjaan_pemohon = $req->pekerjaan_pemohon;
-        $new->alamat = $req->alamat;
-        $new->tgl_surat_dibuat = $req->tgl_surat_dibuat;
-        $new->save();
+        // Perbarui field lainnya
+        $suratTidakMampu->tanda_tangan = $req->tanda_tangan;
+        $suratTidakMampu->nama_lengkap = $req->nama_lengkap;
+        $suratTidakMampu->nik = $req->nik;
+        $suratTidakMampu->tempat_lahir = $req->tempat_lahir;
+        $suratTidakMampu->tgl_lahir = $req->tgl_lahir;
+        $suratTidakMampu->jenis_kelamin = $req->jenis_kelamin;
+        $suratTidakMampu->status_perkawinan = $req->status_perkawinan;
+        $suratTidakMampu->agama = $req->agama;
+        $suratTidakMampu->pekerjaan_pemohon = $req->pekerjaan_pemohon;
+        $suratTidakMampu->alamat = $req->alamat;
+        $suratTidakMampu->tgl_surat_dibuat = $req->tgl_surat_dibuat;
+        
+        // Save the updated data
+        $suratTidakMampu->save();
     
-        return redirect('/surat-tidak-mampu')->with('message', 'Surat Tidak Mampu berhasil diPerbaharui dengan nomor surat: ' . $new->nomor_surat);
-    
+        // Redirect or return the appropriate response
+        return redirect('/surat-tidak-mampu')->with('message', 'Surat Tidak Mampu berhasil diperbaharui dengan nomor surat: ' . $suratTidakMampu->nomor_surat);
     }
+    
 
     public function surat_tidak_mampu_lihat_data($id) {
         $getData = surat_tidak_mampu::with('getUser')->find($id);
@@ -799,7 +860,7 @@ class DataSuratController extends Controller
         $nomorSuratBerikutnya = $countSuratBulanIni + 1;
 
         // Fungsi untuk mengubah bulan menjadi format Romawi
-        function bulanRomawi($bulan)
+        function bulanRomawiSuratDomisili($bulan)
         {
             $bulanRomawi = [
                 1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV',
@@ -809,7 +870,7 @@ class DataSuratController extends Controller
             return $bulanRomawi[intval($bulan)];
         }
 
-        $bulanSuratDibuatRomawi = bulanRomawi($bulanSuratDibuat);
+        $bulanSuratDibuatRomawi = bulanRomawiSuratDomisili($bulanSuratDibuat);
 
         // Susun nomor surat
         $nomorSurat = sprintf("140/%03d/KM-MES/%s/%s", 
@@ -848,8 +909,8 @@ class DataSuratController extends Controller
         return view('DataSurat.SuratKeteranganDomisili.editsuratDomisili', compact('getData','getUser'));
     
     }
-    public function surat_domisili_edit_save(Request $req, $id){
-
+    public function surat_domisili_edit_save(Request $req, $id) {
+        // Validasi input
         $req->validate([
             'tanda_tangan' => 'required|exists:users,id',
             'nama_lengkap' => 'required|min:3',
@@ -861,53 +922,72 @@ class DataSuratController extends Controller
             'agama' => 'required',
             'status_perkawinan' => 'required',
             'pekerjaan_pemohon' => 'required',
-            'alamat' => 'required',
+            'alamat' => 'required|min:5',
             'tgl_surat_dibuat' => 'required|date',
         ]);
-
-        $new = surat_domisili::find($id);
-
-        if ($req->tgl_surat_dibuat != $new->tgl_surat_dibuat) {
+    
+        // Temukan data surat domisili berdasarkan id
+        $suratDomisili = surat_domisili::find($id);
+        if (!$suratDomisili) {
+            return redirect('/surat-domisili')->withErrors('Data surat domisili tidak ditemukan.');
+        }
+    
+        // Check if the tgl_surat_dibuat is changed
+        if ($req->tgl_surat_dibuat != $suratDomisili->tgl_surat_dibuat) {
             // Extract bulan dan tahun dari tanggal_surat_dibuat
             $tanggalSuratDibuat = Carbon::parse($req->tgl_surat_dibuat);
             $bulanSuratDibuat = $tanggalSuratDibuat->format('m');
             $tahunSuratDibuat = $tanggalSuratDibuat->format('Y');
-
+    
             // Hitung nomor surat berdasarkan urutan surat per bulan
-            $countSuratBulanIni = surat_tidak_mampu::whereYear('tgl_surat_dibuat', $tahunSuratDibuat)
+            $countSuratBulanIni = surat_domisili::whereYear('tgl_surat_dibuat', $tahunSuratDibuat)
                 ->whereMonth('tgl_surat_dibuat', $bulanSuratDibuat)
                 ->count();
             $nomorSuratBerikutnya = $countSuratBulanIni + 1;
-
-            // Susun nomor surat
-            $nomorSurat = sprintf("140/%03d/KM-MES/%02d/%s", 
-                $nomorSuratBerikutnya, 
-                $bulanSuratDibuat, 
-                $tahunSuratDibuat
-            );
-
-
-            // Perbarui nomor surat
-            $new->nomor_surat = $nomorSurat;
-        }
-
-        $new->tanda_tangan = $req->tanda_tangan;
-        $new->nama_lengkap = $req->nama_lengkap;
-        $new->nik = $req->nik;
-        $new->tempat_lahir = $req->tempat_lahir;
-        $new->tgl_lahir = $req->tgl_lahir;
-        $new->jenis_kelamin = $req->jenis_kelamin;
-        $new->kewarganegaraan = $req->kewarganegaraan;
-        $new->agama = $req->agama;
-        $new->status_perkawinan = $req->status_perkawinan;
-        $new->pekerjaan_pemohon = $req->pekerjaan_pemohon;
-        $new->alamat = $req->alamat;
-        $new->tgl_surat_dibuat = $req->tgl_surat_dibuat;
-        $new->save();
-
-        return redirect('/surat-domisili')->with('message', 'Surat Keterangan Domisili berhasil diPerbaharui dengan nomor surat: ' . $new->nomor_surat);
     
+            // Fungsi untuk mengubah bulan menjadi format Romawi
+            function bulanRomawiSuratDomisili($bulan) {
+                $bulanRomawi = [
+                    1 => 'I', 2 => 'II', 3 => 'III', 4 => 'IV',
+                    5 => 'V', 6 => 'VI', 7 => 'VII', 8 => 'VIII',
+                    9 => 'IX', 10 => 'X', 11 => 'XI', 12 => 'XII'
+                ];
+                return $bulanRomawi[intval($bulan)];
+            }
+    
+            $bulanSuratDibuatRomawi = bulanRomawiSuratDomisili($bulanSuratDibuat);
+    
+            // Susun nomor surat
+            $nomorSurat = sprintf("140/%03d/KM-MES/%s/%s", 
+                $nomorSuratBerikutnya, 
+                $bulanSuratDibuatRomawi, 
+                $tahunSuratDibuat);
+    
+            // Perbarui nomor surat
+            $suratDomisili->nomor_surat = $nomorSurat;
+        }
+    
+        // Perbarui field lainnya
+        $suratDomisili->tanda_tangan = $req->tanda_tangan;
+        $suratDomisili->nama_lengkap = $req->nama_lengkap;
+        $suratDomisili->nik = $req->nik;
+        $suratDomisili->tempat_lahir = $req->tempat_lahir;
+        $suratDomisili->tgl_lahir = $req->tgl_lahir;
+        $suratDomisili->jenis_kelamin = $req->jenis_kelamin;
+        $suratDomisili->kewarganegaraan = $req->kewarganegaraan;
+        $suratDomisili->agama = $req->agama;
+        $suratDomisili->status_perkawinan = $req->status_perkawinan;
+        $suratDomisili->pekerjaan_pemohon = $req->pekerjaan_pemohon;
+        $suratDomisili->alamat = $req->alamat;
+        $suratDomisili->tgl_surat_dibuat = $req->tgl_surat_dibuat;
+    
+        // Save the updated data
+        $suratDomisili->save();
+    
+        // Redirect or return the appropriate response
+        return redirect('/surat-domisili')->with('message', 'Surat Keterangan Domisili berhasil diperbaharui dengan nomor surat: ' . $suratDomisili->nomor_surat);
     }
+    
 
     public function surat_domisili_lihat_data($id){
         $getData = surat_domisili::with('getUser')->find($id);
@@ -949,6 +1029,12 @@ class DataSuratController extends Controller
     }
 
     public function hapus_surat_domisili($id){
+        
+        $data = surat_domisili::find($id);
+        $data->delete();
+        return redirect()->back()->with('message', 'Surat Keterangan Domisili berhasil dihapus dengan nomor surat: ' . $data->nomor_surat);
 
     }
+
 }
+
