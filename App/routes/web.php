@@ -9,7 +9,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-
     Route::get('/', [AuthController::class, 'login'])->name('login');
     Route::post('/', [AuthController::class, 'login_proses']);
 
@@ -38,8 +37,6 @@ use Illuminate\Support\Facades\Route;
            
     });
 
-
-
     Route::middleware(['auth:','cekLevel:Super_Admin,Admin,User'])->group(function () {
         /**
          * Routing untuk tombol Logout
@@ -52,7 +49,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/surat-masuk/data/{id}', [DataSuratController::class, 'lihatDataSurat']);
 
         //surat keluar (lihat data)
-        Route::get('/surat-keluar/data/{id}', [DataSuratController::class, 'lihatDataSuratKeluar']);
+        // Route::get('/surat-keluar/data/{id}', [DataSuratController::class, 'lihatDataSuratKeluar']);
 
     });
 
@@ -118,13 +115,13 @@ use Illuminate\Support\Facades\Route;
              * ======Surat keluar========
              * Fitur ini hanya dapat gunakan oleh level User
              */
-            Route::get('/surat-keluar/add', [DataSuratController::class, 'addSuratKeluar']);
-            Route::post('/surat-keluar/add', [DataSuratController::class, 'addSuratKeluar_save']);
+            // Route::get('/surat-keluar/add', [DataSuratController::class, 'addSuratKeluar']);
+            // Route::post('/surat-keluar/add', [DataSuratController::class, 'addSuratKeluar_save']);
 
-            Route::get('/surat-keluar/edit/{id}', [DataSuratController::class, 'dataSuratKeluarEdit']);
-            Route::post('/surat-keluar/edit/{id}', [DataSuratController::class, 'dataSuratKeluarEdit_save']);
+            // Route::get('/surat-keluar/edit/{id}', [DataSuratController::class, 'dataSuratKeluarEdit']);
+            // Route::post('/surat-keluar/edit/{id}', [DataSuratController::class, 'dataSuratKeluarEdit_save']);
 
-            Route::get('/surat-keluar/destroy/{id}', [DataSuratController::class, 'destroySuratKeluar']);
+            // Route::get('/surat-keluar/destroy/{id}', [DataSuratController::class, 'destroySuratKeluar']);
 
 
             // surat Keterangan Usaha
@@ -187,7 +184,7 @@ use Illuminate\Support\Facades\Route;
                 * Route ini hanya untuk melihat data saja
                 * user level -> Super_Admin dan User
                 */ 
-                Route::get('/data/surat-keluar', [DataSuratController::class, 'dataSuratKeluar']);
+                // Route::get('/data/surat-keluar', [DataSuratController::class, 'dataSuratKeluar']);
 
             
         /**

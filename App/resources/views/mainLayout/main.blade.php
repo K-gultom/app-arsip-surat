@@ -80,6 +80,16 @@
         .jabatan{
             font-size: 16px;
         }
+        .logout-btn{
+            border-radius: 50px;
+            text-decoration: none; 
+            margin-right: 30px;
+            background-color: #0c3c7a;
+        }
+        .logout-btn:hover{
+            background-color: #021733;
+
+        }
     </style>
 </head>
 
@@ -163,7 +173,7 @@
                         Hai {{Auth()->user()->name}}  <strong>-</strong> {{ Auth::user()->Jabatan }}
                     </a>  
                 </div>
-                <a href="{{url('/logout')}}" class="text-light" style="text-decoration: none; margin-right: 30px;">
+                <a href="{{url('/logout')}}" class="text-light btn btn-sm logout-btn">
                     Logout  <i class="fa-solid fa-power-off"></i>
                     {{-- <i class="bi bi-box-arrow-right text-light ms-auto"></i> --}}
                 </a>
